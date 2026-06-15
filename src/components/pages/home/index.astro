@@ -1,0 +1,247 @@
+---
+import type { Locale } from "@/lib/i18n";
+import { getDictionary, localizePath } from "@/lib/i18n";
+import { getVersion } from "@/lib/versions";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+
+const prompt = "guest@glyndor:~$";
+const podupVersion = getVersion("Glyndor/podup") ?? t.projects.podup.version;
+
+const dotClass = (status: string) =>
+	status === "released"
+		? "text-signal-green"
+		: status === "comingSoon"
+			? "text-accent"
+			: "text-signal-amber";
+
+const panel = t.projects.panel;
+const podup = t.projects.podup;
+const mail = t.projects.mail;
+const tp = t.transparencia;
+
+// Precomputed `tree ./projects` rows.
+const tree = [
+	{
+		c: "├──",
+		name: "panel/",
+		href: localizePath("/projects/panel", locale),
+		desc: panel.tagline,
+		status: t.statuses[panel.status],
+		dot: dotClass(panel.status),
+	},
+	{
+		c: "│   └──",
+		name: "panel-agent",
+		href: localizePath("/projects/panel-agent", locale),
+		desc: "component · signed agent over WireGuard + mTLS",
+		component: true,
+	},
+	{
+		c: "├──",
+		name: "podup/",
+		href: localizePath("/projects/podup", locale),
+		desc: podup.tagline,
+		status: t.statuses[podup.status],
+		version: podupVersion,
+		versionRepo: "Glyndor/podup",
+		dot: dotClass(podup.status),
+	},
+	{
+		c: "├──",
+		name: "mail/",
+		href: localizePath("/projects/mail", locale),
+		desc: mail.tagline,
+		status: t.statuses[mail.status],
+		dot: dotClass(mail.status),
+	},
+	{
+		c: "│   └──",
+		name: "mail-panel",
+		href: localizePath("/projects/mail-panel", locale),
+		desc: "component · admin UI on the mail API",
+		component: true,
+	},
+	{
+		c: "└──",
+		name: "transparencia/",
+		href: localizePath("/projects/transparencia", locale),
+		desc: tp.tagline,
+		status: t.statuses[tp.status],
+		dot: dotClass(tp.status),
+	},
+];
+
+const banner = ` ██████╗ ██╗  ██╗   ██╗███╗   ██╗██████╗  ██████╗ ██████╗
+██╔════╝ ██║  ╚██╗ ██╔╝████╗  ██║██╔══██╗██╔═══██╗██╔══██╗
+██║  ███╗██║   ╚████╔╝ ██╔██╗ ██║██║  ██║██║   ██║██████╔╝
+██║   ██║██║    ╚██╔╝  ██║╚██╗██║██║  ██║██║   ██║██╔══██╗
+╚██████╔╝███████╗██║   ██║ ╚████║██████╔╝╚██████╔╝██║  ██║
+ ╚═════╝ ╚══════╝╚═╝   ╚═╝  ╚═══╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝`;
+---
+
+<div class="w-full px-4 py-16 text-sm leading-relaxed sm:px-8 lg:px-16 xl:px-24 sm:text-[15px]">
+	<!-- ASCII banner -->
+	<h1 class="sr-only">Glyndor</h1>
+	<div class="rise">
+		<pre aria-hidden="true" class="ascii">{banner}</pre>
+	</div>
+	<p class="rise mt-3 text-muted-foreground" style="animation-delay:60ms">
+		<span class="text-muted-foreground/60">//</span>
+		{t.footer.tagline}
+		<span class="ml-2 text-muted-foreground/50">glyndor v0.1.0 · apache-2.0</span>
+	</p>
+
+	<!-- session -->
+	<div class="mt-12 space-y-2">
+		<!-- whoami -->
+		<p>
+			<span class="text-accent">{prompt}</span>
+			<span class="type ml-2 text-foreground" style="--w:6ch;--n:6;animation-delay:.3s">whoami</span
+			>
+		</p>
+		<p class="stream pb-4 text-foreground/90 glow-text" style="animation-delay:.9s">
+			{t.home.console.identity}
+		</p>
+
+		<!-- cat mission -->
+		<p>
+			<span class="text-accent">{prompt}</span>
+			<span class="type ml-2 text-foreground" style="--w:17ch;--n:17;animation-delay:1.2s"
+				>cat ./mission.txt</span
+			>
+		</p>
+		<p class="stream max-w-4xl pb-4 text-muted-foreground" style="animation-delay:1.85s">
+			{t.home.hero.subtitle}
+		</p>
+
+		<!-- tree -->
+		<p>
+			<span class="text-accent">{prompt}</span>
+			<span class="type ml-2 text-foreground" style="--w:15ch;--n:15;animation-delay:2.15s"
+				>tree ./projects</span
+			>
+		</p>
+		<div class="stream pt-1" style="animation-delay:2.75s">
+			<p class="text-muted-foreground">./projects</p>
+			{
+				tree.map((row) => (
+					<a
+						href={row.href}
+						class="group grid grid-cols-[auto_1fr] gap-x-2 py-1 hover:bg-accent-soft sm:grid-cols-[5.5rem_11rem_1fr_auto]"
+					>
+						<span class="whitespace-pre text-muted-foreground/50">{row.c} </span>
+						<span
+							class={
+								row.component
+									? "text-muted-foreground group-hover:text-accent"
+									: "font-semibold text-foreground group-hover:text-accent"
+							}
+						>
+							{!row.component && <span class={`${row.dot} mr-1`}>●</span>}
+							{row.name}
+						</span>
+						<span class="col-span-2 truncate text-muted-foreground/80 sm:col-span-1">
+							{row.desc}
+						</span>
+						{row.status && (
+							<span class="hidden whitespace-nowrap text-xs uppercase tracking-wider text-muted-foreground sm:inline">
+								[{row.status}
+								{row.version && (
+									<>
+										{" · "}
+										{row.version}
+									</>
+								)}
+								]
+							</span>
+						)}
+					</a>
+				))
+			}
+		</div>
+
+		<!-- final prompt + actions -->
+		<p class="stream pt-7" style="animation-delay:3.1s">
+			<span class="text-accent">{prompt}</span>
+			<span class="ml-2 text-muted-foreground/70"># {t.home.console.hint}</span>
+			<span class="caret" aria-hidden="true"></span>
+		</p>
+
+		<div class="stream flex flex-col gap-1 pt-2 sm:flex-row sm:gap-8" style="animation-delay:3.3s">
+			<a
+				href={localizePath("/projects", locale)}
+				class="group text-foreground transition-colors hover:text-accent"
+			>
+				<span class="text-accent">$</span> ./explore --projects
+				<span class="text-muted-foreground/50 transition-colors group-hover:text-accent"
+					>→</span
+				>
+			</a>
+			<a
+				href="https://github.com/Glyndor"
+				target="_blank" rel="noopener"
+				class="group text-muted-foreground transition-colors hover:text-foreground"
+			>
+				<span class="text-accent">$</span> git clone github.com/Glyndor
+			</a>
+			<a
+				href={localizePath("/support", locale)}
+				class="group text-muted-foreground transition-colors hover:text-accent"
+			>
+				<span class="text-accent">$</span> glyndor support
+				<span class="text-muted-foreground/50 transition-colors group-hover:text-accent">♥</span>
+			</a>
+		</div>
+	</div>
+
+	<!-- systemctl status transparencia (dogfooding, raw) -->
+	<div class="mt-20 border-t border-border pt-10">
+		<p>
+			<span class="text-accent">{prompt}</span>
+			<span class="ml-2 text-foreground">systemctl status transparencia</span>
+		</p>
+		<div class="mt-3 space-y-1">
+			<p class="flex flex-wrap items-center gap-2">
+				<span class={dotClass(tp.status)}>●</span>
+				<span class="font-semibold text-foreground">transparencia.service</span>
+				<span class="text-muted-foreground">— {tp.tagline}</span>
+			</p>
+			<p class="pl-4 text-muted-foreground">
+				<span class="text-muted-foreground/60">Loaded:</span>
+				<span class="text-accent">{t.common.runsOn}</span>
+			</p>
+			<p class="pl-4 text-muted-foreground">
+				<span class="text-muted-foreground/60">Active:</span>
+				<span class="text-signal-amber">{t.statuses[tp.status]}</span> · {tp.scope}
+			</p>
+			<p class="pl-4 text-muted-foreground">
+				<span class="text-muted-foreground/60">Tasks:</span>
+				{tp.features.length} — {tp.features.join(", ").toLowerCase()}
+			</p>
+			<p class="flex flex-col gap-1 pt-3 pl-4 sm:flex-row sm:gap-8">
+				<a
+					href={tp.url}
+					target="_blank" rel="noopener"
+					class="group text-foreground transition-colors hover:text-accent"
+				>
+					<span class="text-accent">$</span> open {tp.url.replace("https://", "")}
+					<span class="text-muted-foreground/50 transition-colors group-hover:text-accent"
+						>↗</span
+					>
+				</a>
+				<a
+					href={localizePath("/projects/transparencia", locale)}
+					class="group text-muted-foreground transition-colors hover:text-foreground"
+				>
+					<span class="text-accent">$</span> {t.common.learnMore}
+				</a>
+			</p>
+		</div>
+	</div>
+</div>

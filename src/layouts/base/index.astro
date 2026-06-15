@@ -1,0 +1,59 @@
+---
+import SiteFooter from "@/components/site-footer/index.astro";
+import SiteHeader from "@/components/site-header/index.astro";
+import type { Locale } from "@/lib/i18n";
+import { defaultLocale, getDictionary, locales, localizePath, stripLocale } from "@/lib/i18n";
+import "@/styles/global.css";
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+	locale: Locale;
+	title: string;
+	description: string;
+}
+
+const { locale, title, description } = Astro.props;
+const t = getDictionary(locale);
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// hreflang alternates for SEO: one per locale + x-default.
+const basePath = stripLocale(Astro.url.pathname);
+const alternates = locales.map((l) => ({
+	hreflang: l,
+	href: new URL(localizePath(basePath, l), Astro.site).href,
+}));
+const defaultHref = new URL(localizePath(basePath, defaultLocale), Astro.site).href;
+---
+
+<!doctype html>
+<html lang={locale}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" href="/icon.png" />
+		<link rel="apple-touch-icon" href="/apple-icon.png" />
+		<link rel="canonical" href={canonical} />
+		{alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
+		<link rel="alternate" hreflang="x-default" href={defaultHref} />
+		<meta name="theme-color" content="#181a18" />
+		<meta property="og:locale" content={locale} />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={t.site.name} />
+		<ClientRouter />
+	</head>
+	<body class="crt grain relative flex min-h-dvh flex-col overflow-x-hidden">
+		<!-- Atmosphere: CRT glass, no boxes -->
+		<div aria-hidden="true" class="vignette pointer-events-none fixed inset-0 -z-10"></div>
+
+		<SiteHeader locale={locale} />
+		<main class="flex-1">
+			<slot />
+		</main>
+		<SiteFooter locale={locale} />
+	</body>
+</html>

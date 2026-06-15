@@ -1,0 +1,22 @@
+# Local preview of the built static site under rootless Podman.
+#
+#   bun run build
+#   podman compose up
+#
+# Serves the contents of ./dist on http://127.0.0.1:8080 (localhost only).
+services:
+  web:
+    image: docker.io/library/caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      # Bind to localhost only — opt in to external exposure explicitly.
+      - "127.0.0.1:8080:80"
+    volumes:
+      - ./dist:/usr/share/caddy:ro,Z
+    command:
+      - caddy
+      - file-server
+      - --root
+      - /usr/share/caddy
+      - --listen
+      - ":80"

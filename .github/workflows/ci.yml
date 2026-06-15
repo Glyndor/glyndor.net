@@ -1,0 +1,14 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [develop, main]
+
+permissions: {}
+
+jobs:
+  node:
+    # Reusable workflow lives once in Glyndor/.github. Pin to a commit SHA.
+    # TODO: replace <sha> with the current Glyndor/.github commit SHA.
+    uses: Glyndor/.github/.github/workflows/node-ci.yml@<sha>

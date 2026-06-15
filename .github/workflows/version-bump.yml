@@ -1,0 +1,64 @@
+name: version-bump
+
+# Keeps src/data/versions.json in sync with upstream GitHub releases and opens
+# a PR when a tag changes. Builds stay reproducible (no network at build time);
+# the displayed version updates only through a reviewed PR.
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+  # Optional instant trigger: a release workflow in podup / panel-agent can
+  # `POST /repos/Glyndor/glyndor.net/dispatches` with event_type "release".
+  repository_dispatch:
+    types: [release]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      FILE: src/data/versions.json
+    steps:
+      # TODO: pin to the current actions/checkout commit SHA (GitHub-owned only).
+      - uses: actions/checkout@<sha> # v4
+
+      - name: Sync versions from latest releases
+        id: sync
+        run: |
+          set -euo pipefail
+          changed=0
+          for repo in $(jq -r 'keys[]' "$FILE"); do
+            tag=$(gh api "repos/$repo/releases/latest" --jq '.tag_name' 2>/dev/null || true)
+            [ -z "$tag" ] && continue
+            cur=$(jq -r --arg r "$repo" '.[$r]' "$FILE")
+            if [ "$tag" != "$cur" ]; then
+              tmp=$(mktemp)
+              jq --arg r "$repo" --arg t "$tag" '.[$r] = $t' "$FILE" > "$tmp"
+              mv "$tmp" "$FILE"
+              echo "$repo: $cur -> $tag"
+              changed=1
+            fi
+          done
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request
+        if: steps.sync.outputs.changed == '1'
+        run: |
+          set -euo pipefail
+          branch="chore/version-bump-${{ github.run_id }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add "$FILE"
+          git commit -s -m "chore: bump project versions"
+          git push origin "$branch"
+          gh pr create \
+            --base develop \
+            --head "$branch" \
+            --title "chore: bump project versions" \
+            --body "Automated sync of src/data/versions.json from upstream GitHub releases." \
+            --label deps

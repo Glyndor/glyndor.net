@@ -1,0 +1,12 @@
+---
+import Home from "@/components/pages/home/index.astro";
+import Base from "@/layouts/base/index.astro";
+import { getDictionary } from "@/lib/i18n";
+
+const locale = "es" as const;
+const t = getDictionary(locale);
+---
+
+<Base locale={locale} title={`${t.site.name} — ${t.site.tagline}`} description={t.site.description}>
+	<Home locale={locale} />
+</Base>

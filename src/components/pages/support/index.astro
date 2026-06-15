@@ -1,0 +1,81 @@
+---
+import type { Locale } from "@/lib/i18n";
+import { getDictionary } from "@/lib/i18n";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const s = t.support;
+const host = s.patreon.url.replace("https://", "");
+const prompt = "guest@glyndor:~$";
+---
+
+<section class="w-full px-4 py-16 text-sm leading-relaxed sm:px-8 sm:text-[15px] lg:px-16 xl:px-24">
+	<p class="rise">
+		<span class="text-accent">{prompt}</span>
+		<span class="ml-2 text-foreground">glyndor support</span>
+	</p>
+	<h1 class="rise mt-4 text-3xl font-semibold sm:text-4xl" style="animation-delay:60ms">
+		{s.title}
+	</h1>
+	<p class="rise mt-4 max-w-3xl text-muted-foreground" style="animation-delay:120ms">
+		{s.intro}
+	</p>
+
+	<!-- what it funds -->
+	<div class="rise mt-10" style="animation-delay:180ms">
+		<p>
+			<span class="text-accent">{prompt}</span>
+			<span class="ml-2 text-foreground">cat ./why.txt</span>
+		</p>
+		<ul class="mt-2 space-y-1">
+			{
+				s.funds.map((fund) => (
+					<li class="text-muted-foreground">
+						<span class="text-accent">›</span> {fund}
+					</li>
+				))
+			}
+		</ul>
+	</div>
+
+	<!-- channels -->
+	<div class="rise mt-10" style="animation-delay:240ms">
+		<p>
+			<span class="text-accent">{prompt}</span>
+			<span class="ml-2 text-foreground">ls ~/support</span>
+		</p>
+		<a
+			href={s.patreon.url}
+			target="_blank" rel="noopener"
+			class="group mt-2 grid grid-cols-[auto_1fr] gap-x-2 hover:bg-accent-soft sm:grid-cols-[auto_8rem_1fr_auto]"
+		>
+			<span class="whitespace-pre text-muted-foreground/50">└── </span>
+			<span class="font-semibold text-foreground group-hover:text-accent">
+				{s.patreon.label}/
+			</span>
+			<span class="col-span-2 text-muted-foreground/80 sm:col-span-1">
+				{s.patreon.description}
+			</span>
+			<span class="hidden whitespace-nowrap text-xs text-muted-foreground transition-colors group-hover:text-accent sm:inline">
+				[open ↗]
+			</span>
+		</a>
+	</div>
+
+	<!-- cta -->
+	<div class="rise mt-10" style="animation-delay:300ms">
+		<a
+			href={s.patreon.url}
+			target="_blank" rel="noopener"
+			class="group text-foreground transition-colors hover:text-accent"
+		>
+			<span class="text-accent">$</span> open {host}
+			<span class="text-muted-foreground/50 transition-colors group-hover:text-accent">↗</span>
+		</a>
+		<p class="mt-4 text-muted-foreground/70"># {s.thanks}</p>
+	</div>
+</section>

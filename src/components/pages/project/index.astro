@@ -1,0 +1,209 @@
+---
+import type { Locale } from "@/lib/i18n";
+import { getDictionary, localizePath } from "@/lib/i18n";
+import type { StatusKey } from "@/lib/i18n/en";
+import { getVersion } from "@/lib/versions";
+
+interface ProjectData {
+	name: string;
+	tagline: string;
+	summary: string;
+	features: readonly string[];
+	status: StatusKey;
+	repo: string;
+	version?: string;
+	url?: string;
+	scope?: string;
+	componentOf?: { name: string; slug: string };
+	components?: readonly {
+		name: string;
+		description: string;
+		repo: string;
+	}[];
+}
+
+interface Props {
+	locale: Locale;
+	data: ProjectData;
+}
+
+const { locale, data } = Astro.props;
+const t = getDictionary(locale);
+
+const url = data.url ?? null;
+const scope = data.scope ?? null;
+const componentOf = data.componentOf ?? null;
+const components = data.components ?? [];
+const repoPath = data.repo.replace("https://github.com/", "");
+// Release tag from src/data/versions.json (kept fresh by version-bump CI).
+const version = getVersion(repoPath) ?? data.version ?? null;
+const platformHost = url ? url.replace("https://", "") : null;
+const slug = repoPath.split("/").pop();
+const prompt = "guest@glyndor:~$";
+const dotClass =
+	data.status === "released"
+		? "text-signal-green"
+		: data.status === "comingSoon"
+			? "text-accent"
+			: "text-signal-amber";
+---
+
+<article class="w-full px-4 py-16 text-sm leading-relaxed sm:px-8 lg:px-16 xl:px-24 sm:text-[15px]">
+	<!-- back -->
+	<a
+		href={localizePath("/projects", locale)}
+		class="rise group inline-block text-muted-foreground transition-colors hover:text-foreground"
+	>
+		<span class="text-accent">$</span> cd ..
+		<span class="text-muted-foreground/50"># {t.common.backToProjects}</span>
+	</a>
+
+	<!-- info header -->
+	<p class="rise mt-6" style="animation-delay:60ms">
+		<span class="text-accent">{prompt}</span>
+		<span class="ml-2 text-foreground">glyndor info {slug}</span>
+	</p>
+
+	<div class="rise mt-3" style="animation-delay:120ms">
+		<p class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+			<span class={dotClass}>●</span>
+			{t.statuses[data.status]}
+			{version && <span class="text-accent">· {version}</span>}
+		</p>
+		<h1 class="mt-3 text-3xl font-semibold sm:text-4xl">
+			<span class="text-muted-foreground/40">~/</span>{data.name}
+		</h1>
+		<p class="mt-2 text-lg text-muted-foreground">{data.tagline}</p>
+		{scope && <p class="mt-1 text-sm text-muted-foreground/70"># {scope}</p>}
+		{
+			componentOf && (
+				<p class="mt-1 text-sm text-muted-foreground/70">
+					# {t.common.componentOf}{" "}
+					<a
+						href={localizePath(`/projects/${componentOf.slug}`, locale)}
+						class="text-accent transition-colors hover:underline"
+					>
+						{componentOf.name}
+					</a>
+				</p>
+			)
+		}
+	</div>
+
+	<!-- summary -->
+	<p class="rise mt-8 max-w-4xl text-pretty leading-relaxed" style="animation-delay:180ms">
+		{data.summary}
+	</p>
+
+	<!-- features -->
+	<div class="rise mt-10" style="animation-delay:220ms">
+		<p>
+			<span class="text-accent">{prompt}</span>
+			<span class="ml-2 text-foreground">cat ./features</span>
+		</p>
+		<ul class="mt-2 grid gap-1 sm:grid-cols-2">
+			{
+				data.features.map((feature) => (
+					<li class="text-muted-foreground">
+						<span class="text-accent">›</span> {feature}
+					</li>
+				))
+			}
+		</ul>
+	</div>
+
+	<!-- components -->
+	{
+		components.length > 0 && (
+			<div class="rise mt-10" style="animation-delay:260ms">
+				<p>
+					<span class="text-accent">{prompt}</span>
+					<span class="ml-2 text-foreground">ls ./components</span>
+				</p>
+				<div class="mt-2 space-y-1">
+					{components.map((component, i) => (
+						<a
+							href={localizePath(`/projects/${component.name}`, locale)}
+							class="group grid grid-cols-[auto_1fr] gap-x-2 hover:bg-accent-soft sm:grid-cols-[auto_9rem_1fr_auto]"
+						>
+							<span class="whitespace-pre text-muted-foreground/50">
+								{i === components.length - 1 ? "└──" : "├──"}{" "}
+							</span>
+							<span class="font-semibold text-foreground group-hover:text-accent">
+								{component.name}
+							</span>
+							<span class="col-span-2 text-muted-foreground/80 sm:col-span-1">
+								{component.description}
+							</span>
+							<span class="hidden whitespace-nowrap text-xs text-muted-foreground transition-colors group-hover:text-accent sm:inline">
+								[{t.common.viewProject}]
+							</span>
+						</a>
+					))}
+				</div>
+			</div>
+		)
+	}
+
+	<!-- meta -->
+	<div class="rise mt-10" style="animation-delay:300ms">
+		<p>
+			<span class="text-accent">{prompt}</span>
+			<span class="ml-2 text-foreground">glyndor meta {slug}</span>
+		</p>
+		<dl class="mt-2 space-y-0.5 text-muted-foreground">
+			<div class="flex gap-3">
+				<dt class="w-24 shrink-0 text-muted-foreground/60">{t.common.status}</dt>
+				<dd class="flex items-center gap-2">
+					<span class={dotClass}>●</span>
+					{t.statuses[data.status]}
+				</dd>
+			</div>
+			{
+				version && (
+					<div class="flex gap-3">
+						<dt class="w-24 shrink-0 text-muted-foreground/60">version</dt>
+						<dd class="text-accent">{version}</dd>
+					</div>
+				)
+			}
+			{
+				platformHost && (
+					<div class="flex gap-3">
+						<dt class="w-24 shrink-0 text-muted-foreground/60">{t.common.platform}</dt>
+						<dd class="text-accent">{platformHost}</dd>
+					</div>
+				)
+			}
+			<div class="flex gap-3">
+				<dt class="w-24 shrink-0 text-muted-foreground/60">repo</dt>
+				<dd class="text-foreground">{repoPath}</dd>
+			</div>
+		</dl>
+	</div>
+
+	<!-- actions -->
+	<div class="rise mt-8 flex flex-col gap-1 sm:flex-row sm:gap-8" style="animation-delay:340ms">
+		{
+			url && (
+				<a
+					href={url}
+					target="_blank" rel="noopener"
+					class="group text-foreground transition-colors hover:text-accent"
+				>
+					<span class="text-accent">$</span> open {platformHost}
+					<span class="text-muted-foreground/50 transition-colors group-hover:text-accent">
+						↗
+					</span>
+				</a>
+			)
+		}
+		<a
+			href={data.repo}
+			target="_blank" rel="noopener"
+			class="group text-muted-foreground transition-colors hover:text-foreground"
+		>
+			<span class="text-accent">$</span> git clone github.com/{repoPath}
+		</a>
+	</div>
+</article>

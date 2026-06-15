@@ -1,0 +1,14 @@
+---
+import Project from "@/components/pages/project/index.astro";
+import Base from "@/layouts/base/index.astro";
+import { getDictionary } from "@/lib/i18n";
+
+const locale = "es" as const;
+const project = "panel" as const;
+const t = getDictionary(locale);
+const p = t.projects[project];
+---
+
+<Base locale={locale} title={`${p.name} — ${t.site.name}`} description={p.tagline}>
+	<Project locale={locale} data={p} />
+</Base>

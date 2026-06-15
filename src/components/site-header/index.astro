@@ -1,0 +1,86 @@
+---
+import GithubIcon from "@/components/icons/github/index.astro";
+import LanguageSwitcher from "@/components/language-switcher/index.astro";
+import logo from "@/assets/logo.webp";
+import type { Locale } from "@/lib/i18n";
+import { getDictionary, localizePath, stripLocale } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+import { Image } from "astro:assets";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const current = stripLocale(Astro.url.pathname);
+
+const links = [
+	{ label: t.nav.home, path: "/" },
+	{ label: t.nav.projects, path: "/projects" },
+	{ label: t.nav.support, path: "/support" },
+];
+
+function isActive(path: string): boolean {
+	return path === "/" ? current === "/" : current.startsWith(path);
+}
+---
+
+<header class="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-xl">
+	<div class="flex h-11 w-full items-stretch text-sm">
+		<!-- session segment (tmux-style, inverse video) -->
+		<a
+			href={localizePath("/", locale)}
+			class="group flex shrink-0 items-center gap-2 bg-accent px-3 text-accent-foreground sm:px-4"
+		>
+			<Image
+				src={logo}
+				alt=""
+				width={20}
+				height={20}
+				loading="eager"
+				class="size-5"
+			/>
+			<span class="font-semibold tracking-tight">{t.site.name}</span>
+		</a>
+		<span class="hidden items-center pl-2 text-accent sm:flex">:~$</span>
+
+		<!-- windows -->
+		<nav class="flex items-stretch">
+			{
+				links.map((link, index) => {
+					const active = isActive(link.path);
+					return (
+						<a
+							href={localizePath(link.path, locale)}
+							aria-current={active ? "page" : undefined}
+							class={cn(
+								"flex items-center px-3 transition-colors sm:px-4",
+								active
+									? "bg-accent-soft text-accent"
+									: "text-muted-foreground hover:text-foreground",
+							)}
+						>
+							<span class="text-muted-foreground/50">{index}:</span>
+							<span class="ml-1 lowercase">{link.label}</span>
+							{active && <span class="ml-1 text-accent">*</span>}
+						</a>
+					);
+				})
+			}
+		</nav>
+
+		<!-- right status segment -->
+		<div class="ml-auto flex items-center gap-3 px-3 sm:gap-4 sm:px-4">
+			<a
+				href="https://github.com/Glyndor"
+				target="_blank" rel="noopener"
+				aria-label={t.nav.github}
+				class="text-muted-foreground transition-colors hover:text-foreground"
+			>
+				<GithubIcon class="size-5" />
+			</a>
+			<LanguageSwitcher locale={locale} />
+		</div>
+	</div>
+</header>

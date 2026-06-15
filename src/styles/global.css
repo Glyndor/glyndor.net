@@ -1,0 +1,268 @@
+@import "@fontsource-variable/jetbrains-mono";
+@import "tailwindcss";
+
+/*
+ * Glyndor — terminal / TTY aesthetic.
+ * One monospace family, carbon surfaces, phosphor-cyan accent, CRT scanlines,
+ * commands that type themselves and output that streams in.
+ */
+
+:root {
+	--radius: 0px;
+
+	--bg: oklch(0.15 0.006 200);
+	--bg-elevated: oklch(0.185 0.008 200);
+	--surface: oklch(0.22 0.009 200);
+	--foreground: oklch(0.93 0.01 195);
+	--muted: oklch(0.22 0.008 200);
+	--muted-foreground: oklch(0.62 0.018 200);
+
+	--border: oklch(0.99 0 0 / 10%);
+	--border-strong: oklch(0.99 0 0 / 18%);
+
+	--accent: oklch(0.83 0.13 207);
+	--accent-foreground: oklch(0.15 0.03 230);
+	--accent-soft: oklch(0.83 0.13 207 / 12%);
+
+	--signal-amber: oklch(0.82 0.16 75);
+	--signal-green: oklch(0.84 0.18 145);
+	--ring: var(--accent);
+}
+
+@theme inline {
+	--radius-sm: calc(var(--radius) - 2px);
+	--radius-md: var(--radius);
+	--radius-lg: calc(var(--radius) + 4px);
+	--radius-xl: calc(var(--radius) + 10px);
+
+	--font-sans: "JetBrains Mono Variable", ui-monospace, monospace;
+	--font-display: "JetBrains Mono Variable", ui-monospace, monospace;
+	--font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+	--color-background: var(--bg);
+	--color-foreground: var(--foreground);
+	--color-card: var(--bg-elevated);
+	--color-card-foreground: var(--foreground);
+	--color-surface: var(--surface);
+	--color-popover: var(--bg-elevated);
+	--color-popover-foreground: var(--foreground);
+	--color-primary: var(--accent);
+	--color-primary-foreground: var(--accent-foreground);
+	--color-secondary: var(--surface);
+	--color-secondary-foreground: var(--foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-accent-soft: var(--accent-soft);
+	--color-signal-amber: var(--signal-amber);
+	--color-signal-green: var(--signal-green);
+	--color-border: var(--border);
+	--color-border-strong: var(--border-strong);
+	--color-input: var(--border-strong);
+	--color-ring: var(--ring);
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+
+	html {
+		scroll-behavior: smooth;
+		color-scheme: dark;
+	}
+
+	body {
+		@apply bg-background text-foreground font-mono antialiased;
+		font-variant-ligatures: contextual;
+	}
+
+	::selection {
+		background: var(--accent);
+		color: var(--accent-foreground);
+	}
+
+	:focus-visible {
+		outline: 1px solid var(--accent);
+		outline-offset: 2px;
+	}
+}
+
+/* --- Atmosphere ----------------------------------------------------------- */
+
+/* CRT screen darkening toward the edges — no boxes, just glass. */
+.vignette {
+	background: radial-gradient(
+		ellipse 110% 90% at 50% 0%,
+		transparent 50%,
+		oklch(0 0 0 / 35%) 100%
+	);
+}
+
+/* ASCII banner — phosphor, glowing, never wraps. */
+.ascii {
+	font-size: clamp(0.36rem, 1.65vw, 0.8rem);
+	line-height: 1.04;
+	white-space: pre;
+	color: var(--accent);
+	text-shadow: 0 0 12px oklch(0.83 0.13 207 / 0.5);
+	animation: flicker 6s linear infinite;
+}
+
+/* CRT scanlines, fixed over everything. */
+.crt::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: 50;
+	pointer-events: none;
+	opacity: 0.5;
+	background-image: repeating-linear-gradient(
+		to bottom,
+		transparent 0,
+		transparent 2px,
+		oklch(0 0 0 / 18%) 3px,
+		transparent 4px
+	);
+	mix-blend-mode: multiply;
+}
+
+/* Faint grain. */
+.grain::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: 49;
+	pointer-events: none;
+	opacity: 0.035;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Phosphor glow on accent text. */
+.glow-text {
+	text-shadow: 0 0 10px oklch(0.83 0.13 207 / 0.45);
+}
+
+/* --- Terminal primitives -------------------------------------------------- */
+
+/* A command that "types" itself: width animates from 0 to its content width.
+   Set --w (ch) and --n (steps) inline; degrades to full width with no motion. */
+.type {
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	vertical-align: bottom;
+	width: var(--w, auto);
+	animation: type 0.5s steps(var(--n, 14)) both;
+}
+
+/* Console output that streams in after its command. */
+.stream {
+	animation: stream 0.4s ease-out both;
+}
+
+.rise {
+	animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.caret::after {
+	content: "▮";
+	margin-left: 0.1em;
+	color: var(--accent);
+	animation: blink 1.1s step-end infinite;
+}
+
+.cursor-blink {
+	animation: blink 1.1s step-end infinite;
+}
+
+.dot-pulse {
+	animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+/* --- Motion --------------------------------------------------------------- */
+
+@keyframes type {
+	from {
+		width: 0;
+	}
+}
+
+@keyframes stream {
+	from {
+		opacity: 0;
+		transform: translateY(4px);
+	}
+}
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+}
+
+@keyframes blink {
+	0%,
+	49% {
+		opacity: 1;
+	}
+	50%,
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes pulse-dot {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.55;
+	}
+}
+
+/* Subtle CRT flicker for the banner. */
+@keyframes flicker {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	48% {
+		opacity: 1;
+	}
+	49% {
+		opacity: 0.82;
+	}
+	50% {
+		opacity: 1;
+	}
+	78% {
+		opacity: 1;
+	}
+	79% {
+		opacity: 0.9;
+	}
+	80% {
+		opacity: 1;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		/* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override every animation */
+		animation: none !important;
+		/* biome-ignore lint/complexity/noImportantStyles: reduced-motion must override every transition */
+		transition: none !important;
+	}
+	.type {
+		width: var(--w, auto);
+	}
+	html {
+		scroll-behavior: auto;
+	}
+}

@@ -1,0 +1,16 @@
+---
+import ProjectsIndex from "@/components/pages/projects-index/index.astro";
+import Base from "@/layouts/base/index.astro";
+import { getDictionary } from "@/lib/i18n";
+
+const locale = "es" as const;
+const t = getDictionary(locale);
+---
+
+<Base
+	locale={locale}
+	title={`${t.projectsIndex.title} — ${t.site.name}`}
+	description={t.projectsIndex.subtitle}
+>
+	<ProjectsIndex locale={locale} />
+</Base>

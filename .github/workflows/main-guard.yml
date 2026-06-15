@@ -1,0 +1,20 @@
+name: main-guard
+
+# main is only ever updated from develop. Fail any PR into main from
+# another source branch. The "develop-only" check is required on the
+# main branch ruleset.
+on:
+  pull_request:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  develop-only:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure PRs into main come from develop
+        if: github.head_ref != 'develop'
+        run: |
+          echo "PRs into main must come from develop (source was '${{ github.head_ref }}')."
+          exit 1

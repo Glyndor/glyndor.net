@@ -1,0 +1,64 @@
+---
+import ChevronDown from "@/components/icons/chevron-down/index.astro";
+import type { Locale } from "@/lib/i18n";
+import { localeNames, localizePath, locales, stripLocale } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const basePath = stripLocale(Astro.url.pathname);
+---
+
+<details class="group relative font-mono text-xs">
+	<summary
+		class="flex cursor-pointer list-none items-center gap-2 rounded-md border border-border-strong bg-card/60 px-2.5 py-1.5 backdrop-blur transition-colors hover:border-accent/40 [&::-webkit-details-marker]:hidden"
+	>
+		<img
+			src={`/flags/${locale}.svg`}
+			alt=""
+			width="18"
+			height="18"
+			class="size-[18px] shrink-0 rounded-full ring-1 ring-border-strong"
+		/>
+		<span class="uppercase tracking-[0.15em] text-foreground">{locale}</span>
+		<ChevronDown
+			class="size-3 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+		/>
+	</summary>
+
+	<div
+		class="absolute right-0 top-full z-50 mt-2 min-w-44 overflow-hidden rounded-md border border-border-strong bg-card/95 p-1 shadow-2xl shadow-black/50 backdrop-blur-xl"
+	>
+		{
+			locales.map((target) => {
+				const active = target === locale;
+				return (
+					<a
+						href={localizePath(basePath, target)}
+						hreflang={target}
+						aria-current={active ? "true" : undefined}
+						class={cn(
+							"flex items-center gap-2.5 rounded px-2.5 py-2 transition-colors",
+							active
+								? "bg-accent-soft text-foreground"
+								: "text-muted-foreground hover:bg-background hover:text-foreground",
+						)}
+					>
+						<img
+							src={`/flags/${target}.svg`}
+							alt=""
+							width="18"
+							height="18"
+							class="size-[18px] shrink-0 rounded-full ring-1 ring-border-strong"
+						/>
+						<span class="tracking-wide">{localeNames[target]}</span>
+						{active && <span class="ml-auto text-accent">●</span>}
+					</a>
+				);
+			})
+		}
+	</div>
+</details>
