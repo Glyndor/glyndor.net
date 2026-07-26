@@ -5,10 +5,12 @@ on:
   push:
     branches: [develop, main]
 
-permissions: {}
+permissions:
+  contents: read
 
 jobs:
-  node:
-    # Reusable workflow lives once in Glyndor/.github. Pin to a commit SHA.
-    # TODO: replace <sha> with the current Glyndor/.github commit SHA.
-    uses: Glyndor/.github/.github/workflows/node-ci.yml@<sha>
+  # This site is built with Bun, so it calls bun-ci. The scaffold asked for a
+  # node-ci reusable that does not exist in Glyndor/.github — which is half of
+  # why no run ever started here.
+  bun:
+    uses: Glyndor/.github/.github/workflows/bun-ci.yml@7099f8a9c8be91fa1732fe2402268b338771233f # v1.10.1

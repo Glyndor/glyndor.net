@@ -198,7 +198,7 @@ export const en = {
 			github: "GitHub",
 			documentation: "Documentation",
 		},
-		copyright: "Glyndor. Released under the Apache 2.0 license.",
+		copyright: "Glyndor. Released under the MIT license.",
 	},
 	language: {
 		label: "Language",

@@ -199,7 +199,7 @@ export const es: Dictionary = {
 			github: "GitHub",
 			documentation: "Documentación",
 		},
-		copyright: "Glyndor. Publicado bajo la licencia Apache 2.0.",
+		copyright: "Glyndor. Publicado bajo la licencia MIT.",
 	},
 	language: {
 		label: "Idioma",
