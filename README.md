@@ -80,4 +80,4 @@ Components land in `src/components/ui/` and are yours to edit.
 
 ## 📄 License
 
-[Apache 2.0](./LICENSE).
+[MIT](./LICENSE).
