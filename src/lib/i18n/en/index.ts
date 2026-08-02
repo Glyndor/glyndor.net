@@ -65,11 +65,11 @@ export const en = {
 		comingSoon: "Coming soon",
 	},
 	projects: {
-		panel: {
-			name: "Glyndor panel",
+		helmly: {
+			name: "helmly",
 			tagline: "A secure self-hosted hosting panel.",
 			summary:
-				"Manage firewalls, ports, SSH, containers and WireGuard tunnels from one place. Built on lightweight native binaries with deep security: secure by default and built to ASVS Level 3. Runs single-server, or controls a fleet of agents over WireGuard and mTLS.",
+				"helmly manages firewalls, ports, SSH, containers and WireGuard tunnels from one place — a cPanel/Plesk/Coolify alternative you host yourself. Built on lightweight Rust + Next.js, secure by default and built to ASVS Level 3. Runs single-server, or controls a fleet of agents over WireGuard and mTLS.",
 			features: [
 				"Firewall, ports and SSH management",
 				"Containers and WireGuard tunnels",
@@ -77,13 +77,13 @@ export const en = {
 				"Single-server or fleet of agents",
 			],
 			status: "inDevelopment" as StatusKey,
-			repo: "https://github.com/Glyndor/panel",
+			repo: "https://github.com/Glyndor/helmly",
 			components: [
 				{
-					name: "panel-agent",
+					name: "helmly-agent",
 					description:
-						"Hardened Rust daemon installed on each managed server — runs Ed25519-signed commands and reports telemetry over WireGuard + mTLS. A component of panel, not standalone.",
-					repo: "https://github.com/Glyndor/panel-agent",
+						"Hardened Rust daemon installed on each managed server — runs Ed25519-signed commands and reports telemetry over WireGuard + mTLS. A component of helmly, not standalone.",
+					repo: "https://github.com/Glyndor/helmly-agent",
 				},
 			],
 		},
@@ -99,53 +99,108 @@ export const en = {
 				"Signed, attested cross-platform releases",
 			],
 			status: "released" as StatusKey,
-			version: "v0.17.1",
 			repo: "https://github.com/Glyndor/podup",
 		},
-		mail: {
-			name: "Glyndor mail",
+		epistle: {
+			name: "epistle",
 			tagline: "A headless, self-hosted mail server.",
 			summary:
-				"SMTP, IMAP and modern email security — DKIM, SPF, DMARC and TLS — exposed through an API and CLI, with no UI to get in the way. Filesystem-only storage, minimal dependencies, and the same security DNA as the rest of Glyndor.",
+				"SMTP, IMAP and modern email security — DKIM, SPF, DMARC and TLS — exposed through an API and CLI, with no UI to get in the way. Runs standalone or integrated with helmly. Filesystem-only storage, minimal dependencies, and the same security DNA as the rest of Glyndor.",
 			features: [
 				"SMTP and IMAP4rev2",
 				"DKIM, SPF, DMARC and TLS",
 				"API-first and CLI-driven",
 				"Filesystem storage, no external services",
 			],
-			status: "inDevelopment" as StatusKey,
-			repo: "https://github.com/Glyndor/mail",
+			status: "released" as StatusKey,
+			repo: "https://github.com/Glyndor/epistle",
 			components: [
 				{
-					name: "mail-panel",
+					name: "epistle-panel",
 					description:
-						"Next.js admin UI on top of the mail API: domains, mailboxes, email security and queues. Pairs with mail; the server stays headless.",
-					repo: "https://github.com/Glyndor/mail-panel",
+						"Next.js admin UI on top of the epistle API: domains, mailboxes, email security and queues. Pairs with epistle; the server stays headless.",
+					repo: "https://github.com/Glyndor/epistle-panel",
 				},
 			],
 		},
+		authcore: {
+			name: "authcore",
+			tagline: "Drop-in authentication for Go, secure by default.",
+			summary:
+				"authcore is a standalone Go library for authentication: Argon2id password hashing, EdDSA JWTs with refresh rotation, opaque API keys, OIDC + OAuth2 social login, and email/username validation — secure by default, zero boilerplate to wire up. No server to run; it's a dependency, not a service.",
+			features: [
+				"Argon2id password hashing",
+				"EdDSA JWTs with refresh rotation",
+				"OIDC + OAuth2 social login",
+				"Opaque API keys, zero boilerplate",
+			],
+			status: "released" as StatusKey,
+			url: "https://pkg.go.dev/github.com/Glyndor/authcore",
+			repo: "https://github.com/Glyndor/authcore",
+		},
+		unitpm: {
+			name: "unitpm",
+			tagline: "A drop-in PM2 alternative, systemd-native.",
+			summary:
+				"unitpm manages long-running processes on Linux without a background daemon of its own — it drives systemd directly, so supervised processes survive a unitpm crash or reboot. CLI and library, written in Go, zero-overhead by design.",
+			features: [
+				"systemd-native, no daemon of its own",
+				"Drop-in alternative to PM2 / Supervisor",
+				"CLI and library, written in Go",
+				"Zero-overhead process supervision",
+			],
+			status: "inDevelopment" as StatusKey,
+			repo: "https://github.com/Glyndor/unitpm",
+		},
+		klyradb: {
+			name: "klyradb",
+			tagline: "A desktop DB manager for Linux, like DBngin.",
+			summary:
+				"klyradb is a native desktop app for spinning up isolated PostgreSQL, MySQL, MariaDB, Redis and MongoDB instances on Linux — start, stop and inspect local databases without hand-rolling Compose files or systemd units. Engines download and run on demand.",
+			features: [
+				"PostgreSQL, MySQL, MariaDB, Redis, MongoDB",
+				"Isolated, disposable local instances",
+				"Native desktop app, no Docker required",
+				"Engines download on demand",
+			],
+			status: "released" as StatusKey,
+			url: "https://snapcraft.io/klyradb",
+			repo: "https://github.com/Glyndor/klyradb",
+		},
+		specio: {
+			name: "specio",
+			tagline: "See what a website is built with.",
+			summary:
+				"specio is a Chrome extension that detects the technologies behind any website — CMS, frameworks, analytics, CDNs, servers, fonts and more — right from the toolbar. Free, multilingual and open source: a Wappalyzer alternative with no account and no tracking.",
+			features: [
+				"CMS, framework and stack detection",
+				"Analytics, CDN and font fingerprinting",
+				"Free, multilingual, no account",
+				"Manifest V3, open source",
+			],
+			status: "released" as StatusKey,
+			repo: "https://github.com/Glyndor/specio",
+		},
+		viden: {
+			name: "viden",
+			tagline: "Find and download the video on any page.",
+			summary:
+				"viden is a Chrome extension that detects and downloads the video playing on a page — including hidden or obscured streams over progressive MP4, HLS or DASH. Free, unlimited, multilingual, and it never asks for an account.",
+			features: [
+				"Detects hidden and obscured video streams",
+				"Progressive MP4, HLS and DASH",
+				"Free and unlimited, no account",
+				"Manifest V3, multilingual",
+			],
+			status: "inDevelopment" as StatusKey,
+			repo: "https://github.com/Glyndor/viden",
+		},
 	},
-	transparencia: {
-		name: "Transparencia",
-		tagline: "Follow the trail of Colombia's public money.",
-		summary:
-			"A traceability platform for public spending: an interactive money map, a live feed of government contracts, automatic risk alerts, and a clean open-data API — turning scattered official sources into something any citizen, journalist or watchdog can actually read. Built on Glyndor's own stack and running on Glyndor Panel.",
-		features: [
-			"Interactive money map by region",
-			"Live government contract feed (SECOP)",
-			"Automatic risk scoring and alerts",
-			"Public, normalized open-data API",
-		],
-		scope: "Starts with Colombia · scalable to more countries",
-		status: "comingSoon" as StatusKey,
-		url: "https://transparencia.glyndor.net",
-		repo: "https://github.com/Glyndor/transparencia",
-	},
-	panelAgent: {
-		name: "panel-agent",
+	helmlyAgent: {
+		name: "helmly-agent",
 		tagline: "The hardened agent behind every managed server.",
 		summary:
-			"A hardened Rust daemon installed on each server the panel manages. It executes only Ed25519-signed commands and reports telemetry back over WireGuard + mTLS — a component of Glyndor panel, never exposed on its own.",
+			"A hardened Rust daemon installed on each server helmly manages. It executes only Ed25519-signed commands and reports telemetry back over WireGuard + mTLS — a component of helmly, never exposed on its own.",
 		features: [
 			"Ed25519-signed command execution",
 			"WireGuard + mTLS transport",
@@ -153,14 +208,14 @@ export const en = {
 			"Signed, attested self-updates",
 		],
 		status: "released" as StatusKey,
-		repo: "https://github.com/Glyndor/panel-agent",
-		componentOf: { name: "Glyndor panel", slug: "panel" },
+		repo: "https://github.com/Glyndor/helmly-agent",
+		componentOf: { name: "helmly", slug: "helmly" },
 	},
-	mailPanel: {
-		name: "mail-panel",
-		tagline: "The admin UI for Glyndor mail.",
+	epistlePanel: {
+		name: "epistle-panel",
+		tagline: "The admin UI for epistle.",
 		summary:
-			"A Next.js admin interface on top of the mail server's API: manage domains, mailboxes, email security (DKIM/SPF/DMARC) and queues. The mail server stays headless — mail-panel is just another API consumer, bilingual from day one.",
+			"A Next.js admin interface on top of epistle's API: manage domains, mailboxes, email security (DKIM/SPF/DMARC) and queues. The mail server stays headless — epistle-panel is just another API consumer, bilingual from day one.",
 		features: [
 			"Domains and mailboxes",
 			"Email security: DKIM, SPF, DMARC",
@@ -168,14 +223,14 @@ export const en = {
 			"Bilingual (en + es), API-driven",
 		],
 		status: "inDevelopment" as StatusKey,
-		repo: "https://github.com/Glyndor/mail-panel",
-		componentOf: { name: "Glyndor mail", slug: "mail" },
+		repo: "https://github.com/Glyndor/epistle-panel",
+		componentOf: { name: "epistle", slug: "epistle" },
 	},
 	support: {
 		title: "Support Glyndor",
 		intro: "Glyndor is open source and self-funded. Donations keep the servers running, the security audits happening, and every project free and open.",
 		funds: [
-			"Infrastructure for demos and the transparencia platform",
+			"Infrastructure for demos and public deployments",
 			"Time for development, audits and releases",
 			"Keeping every project free and open source",
 		],

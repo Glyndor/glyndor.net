@@ -4,14 +4,14 @@
 
 [![ci](https://github.com/Glyndor/glyndor.net/actions/workflows/ci.yml/badge.svg)](https://github.com/Glyndor/glyndor.net/actions/workflows/ci.yml)
 
-A static [Astro](https://astro.build) site. English and Spanish, React islands for interactivity, Tailwind CSS v4 with shadcn/ui, and View Transitions for navigation. No runtime server — it builds to plain HTML, CSS and JS.
+A static [Astro](https://astro.build) site. English and Spanish, a full TTY/terminal design in Tailwind CSS v4, self-hosted JetBrains Mono, and zero client-side JavaScript islands — no React, no component framework. No runtime server — it builds to plain HTML, CSS and JS.
 
 ## ✨ Highlights
 
-- ⚡ **Static-first** — Astro builds to static assets; React only ships where it is needed.
+- ⚡ **Static-first, zero islands** — Astro builds to static assets; there is no interactivity that needs a client-side framework.
 - 🌍 **Bilingual** — English (default) and Spanish, routed via Astro's native i18n. Every user-facing string goes through the i18n layer.
-- 🎨 **Tailwind v4 + shadcn/ui** — utility CSS and components you own, in-repo.
-- 🔒 **No third-party services** — GitHub-native badges, self-hosted assets, localhost-only preview.
+- 🎨 **Tailwind v4, hand-built** — a raw terminal aesthetic (scanlines, ASCII banner, inline SVG icons), no component library.
+- 🔒 **No third-party services** — GitHub-native badges, self-hosted assets, localhost-only preview, zero analytics.
 
 ## 🚀 Quick start
 
@@ -34,14 +34,22 @@ bun run dev      # http://localhost:4321
 ## 🗺️ Routes
 
 ```
-/                    Home — what Glyndor is, and its projects
-/projects            All projects
-/projects/panel      Glyndor panel — secure self-hosted hosting panel
-/projects/podup      podup — docker-compose for rootless Podman
-/projects/mail       Glyndor mail — headless self-hosted mail server
+/                       Home — what Glyndor is, and its projects
+/projects               All projects
+/projects/podup         podup — docker-compose for rootless Podman
+/projects/helmly        helmly — secure self-hosted hosting panel
+/projects/helmly-agent  helmly-agent — the agent behind every managed server
+/projects/epistle       epistle — headless self-hosted mail server
+/projects/epistle-panel epistle-panel — admin UI for epistle
+/projects/authcore      authcore — drop-in authentication for Go
+/projects/unitpm        unitpm — systemd-native process manager
+/projects/klyradb       klyradb — desktop database manager
+/projects/specio        specio — website tech-stack detector (Chrome)
+/projects/viden         viden — page video finder and downloader (Chrome)
+/support                Support Glyndor
 ```
 
-Spanish lives under the `/es` prefix (`/es`, `/es/projects`, `/es/projects/panel`, …).
+Spanish lives under the `/es` prefix (`/es`, `/es/projects`, `/es/projects/podup`, …).
 
 ## 🏗️ Structure
 
