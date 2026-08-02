@@ -30,20 +30,44 @@ export function getLocaleFromUrl(url: URL): Locale {
 	return first && isLocale(first) ? first : defaultLocale;
 }
 
-// Strip the locale prefix from a pathname, returning the locale-agnostic path.
+// Top-level route segments that carry a locale-specific slug, keyed by the
+// canonical (English) segment. Product slugs (podup, helmly, ...) are brand
+// names and are never translated — only these generic section names are.
+const routeSlugs: Record<string, Partial<Record<Locale, string>>> = {
+	projects: { es: "proyectos" },
+	support: { es: "apoyar" },
+};
+
+function translateSegment(segment: string, locale: Locale): string {
+	return routeSlugs[segment]?.[locale] ?? segment;
+}
+
+function canonicalSegment(segment: string, locale: Locale): string {
+	for (const [canonical, byLocale] of Object.entries(routeSlugs)) {
+		if (byLocale[locale] === segment) return canonical;
+	}
+	return segment;
+}
+
+// Strip the locale prefix from a pathname, returning the canonical
+// (English-slugged) path regardless of which locale's slugs it used.
 export function stripLocale(pathname: string): string {
-	const [, first, ...rest] = pathname.split("/");
+	const [, first, second, ...rest] = pathname.split("/");
 	if (first && isLocale(first)) {
-		return `/${rest.join("/")}`.replace(/\/$/, "") || "/";
+		const segments = second ? [canonicalSegment(second, first), ...rest] : [];
+		return `/${segments.join("/")}`.replace(/\/$/, "") || "/";
 	}
 	return pathname.replace(/\/$/, "") || "/";
 }
 
-// Build the URL for a locale-agnostic path under a target locale.
+// Build the URL for a canonical (English-slugged) path under a target locale.
 export function localizePath(path: string, locale: Locale): string {
 	const clean = path.startsWith("/") ? path : `/${path}`;
+	const [, first, ...rest] = clean.split("/");
+	const segments = first ? [translateSegment(first, locale), ...rest] : [];
+	const translated = `/${segments.join("/")}`.replace(/\/$/, "") || "/";
 	if (locale === defaultLocale) {
-		return clean;
+		return translated;
 	}
-	return clean === "/" ? `/${locale}` : `/${locale}${clean}`;
+	return translated === "/" ? `/${locale}` : `/${locale}${translated}`;
 }
