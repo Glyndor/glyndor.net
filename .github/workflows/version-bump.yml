@@ -60,4 +60,4 @@ jobs:
             --head "$branch" \
             --title "chore: bump project versions" \
             --body "Automated sync of src/data/versions.json from upstream GitHub releases." \
-            --label deps
+            --label type:deps
