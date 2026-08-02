@@ -46,8 +46,22 @@ const dotClass =
 		: data.status === "comingSoon"
 			? "text-accent"
 			: "text-signal-amber";
+
+const isBrowserExtension = slug === "specio" || slug === "viden";
+const softwareApplicationLd = {
+	"@context": "https://schema.org",
+	"@type": "SoftwareApplication",
+	name: data.name,
+	description: data.summary,
+	applicationCategory: isBrowserExtension ? "BrowserApplication" : "DeveloperApplication",
+	operatingSystem: isBrowserExtension ? "Chrome" : "Linux",
+	url: new URL(Astro.url.pathname, Astro.site).href,
+	...(version ? { softwareVersion: version } : {}),
+	offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+};
 ---
 
+<script type="application/ld+json" is:inline set:html={JSON.stringify(softwareApplicationLd)} />
 <article class="w-full px-4 py-16 text-sm leading-relaxed sm:px-8 lg:px-16 xl:px-24 sm:text-[15px]">
 	<!-- back -->
 	<a
