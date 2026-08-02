@@ -13,4 +13,4 @@ jobs:
   # node-ci reusable that does not exist in Glyndor/.github — which is half of
   # why no run ever started here.
   bun:
-    uses: Glyndor/.github/.github/workflows/bun-ci.yml@7099f8a9c8be91fa1732fe2402268b338771233f # v1.10.1
+    uses: Glyndor/.github/.github/workflows/bun-ci.yml@045903bf83a58651f119bc7d952aa45242b897c5 # v1.12.0
