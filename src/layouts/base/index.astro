@@ -4,6 +4,7 @@ import SiteHeader from "@/components/site-header/index.astro";
 import type { Locale } from "@/lib/i18n";
 import { defaultLocale, getDictionary, locales, localizePath, stripLocale } from "@/lib/i18n";
 import "@/styles/global.css";
+import { getImage } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
@@ -23,6 +24,19 @@ const alternates = locales.map((l) => ({
 	href: new URL(localizePath(basePath, l), Astro.site).href,
 }));
 const defaultHref = new URL(localizePath(basePath, defaultLocale), Astro.site).href;
+
+// og:image: the product's own banner on a project detail page, the org
+// banner everywhere else. Source PNGs are the same ones used as GitHub
+// social-preview banners (ai-context/brand/repos/png/); resized once here.
+const ogSources = import.meta.glob<{ default: ImageMetadata }>("/src/assets/og/*.png", {
+	eager: true,
+});
+const productSlug = basePath.startsWith("/projects/") ? basePath.split("/")[2] : null;
+const ogSource =
+	(productSlug && ogSources[`/src/assets/og/${productSlug}.png`]?.default) ??
+	ogSources["/src/assets/og/glyndor-net.png"].default;
+const og = await getImage({ src: ogSource, width: 1200, format: "webp" });
+const ogImage = new URL(og.src, Astro.site).href;
 ---
 
 <!doctype html>
@@ -36,14 +50,45 @@ const defaultHref = new URL(localizePath(basePath, defaultLocale), Astro.site).h
 		{alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
 		<link rel="alternate" hreflang="x-default" href={defaultHref} />
 		<meta name="theme-color" content="#181a18" />
+		<meta name="robots" content="index, follow" />
 		<meta property="og:locale" content={locale} />
+		{
+			locales
+				.filter((l) => l !== locale)
+				.map((l) => <meta property="og:locale:alternate" content={l} />)
+		}
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonical} />
 		<meta property="og:site_name" content={t.site.name} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content={String(og.attributes.width)} />
+		<meta property="og:image:height" content={String(og.attributes.height)} />
+		<meta property="og:image:alt" content={title} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+		<script type="application/ld+json" is:inline set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "Organization",
+			name: t.site.name,
+			url: "https://glyndor.net",
+			logo: new URL("/icon.png", Astro.site).href,
+			sameAs: ["https://github.com/Glyndor"],
+		})}
+		/>
+		<script type="application/ld+json" is:inline set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			name: t.site.name,
+			url: "https://glyndor.net",
+		})}
+		/>
 		<ClientRouter />
 	</head>
 	<body class="crt grain relative flex min-h-dvh flex-col overflow-x-hidden">
