@@ -55,6 +55,10 @@ export const es: Dictionary = {
 			subheading:
 				"Las herramientas son la mitad de la historia — esto es lo que construimos encima.",
 		},
+		tree: {
+			helmlyAgent: "componente · agente firmado por WireGuard + mTLS",
+			epistlePanel: "componente · UI de administración sobre la API de epistle",
+		},
 	},
 	projectsIndex: {
 		title: "Proyectos",

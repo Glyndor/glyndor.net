@@ -54,6 +54,10 @@ export const en = {
 			heading: "Built on Glyndor",
 			subheading: "Tools are only half the story — here's what we build on top of them.",
 		},
+		tree: {
+			helmlyAgent: "component · signed agent over WireGuard + mTLS",
+			epistlePanel: "component · admin UI on the epistle API",
+		},
 	},
 	projectsIndex: {
 		title: "Projects",
