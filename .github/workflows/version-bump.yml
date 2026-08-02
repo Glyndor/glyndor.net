@@ -7,8 +7,8 @@ on:
   schedule:
     - cron: "0 6 * * *"
   workflow_dispatch:
-  # Optional instant trigger: a release workflow in podup / panel-agent can
-  # `POST /repos/Glyndor/glyndor.net/dispatches` with event_type "release".
+  # Optional instant trigger: a release workflow in any tracked product repo
+  # can `POST /repos/Glyndor/glyndor.net/dispatches` with event_type "release".
   repository_dispatch:
     types: [release]
 
