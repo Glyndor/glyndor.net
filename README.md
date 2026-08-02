@@ -19,7 +19,7 @@ Requires [Bun](https://bun.sh).
 
 ```sh
 bun install
-bun run dev      # http://localhost:4321
+bun run dev      # http://localhost:15694
 ```
 
 | Command            | Action                                      |
@@ -77,14 +77,6 @@ podman compose up        # http://127.0.0.1:8080
 ```
 
 Serves the built `dist/` with Caddy, bound to localhost only.
-
-## 📦 Adding shadcn/ui components
-
-```sh
-bunx --bun shadcn@latest add button
-```
-
-Components land in `src/components/ui/` and are yours to edit.
 
 ## 📄 License
 
