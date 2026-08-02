@@ -72,6 +72,18 @@ const softwareApplicationLd = {
 		<span class="text-muted-foreground/50"># {t.common.backToProjects}</span>
 	</a>
 
+	<!-- banner -->
+	<img
+		src={`/banners/${slug}.webp`}
+		alt={`${data.name} — ${data.tagline}`}
+		width="1280"
+		height="640"
+		loading="eager"
+		decoding="async"
+		class="rise mt-6 w-full max-w-2xl"
+		style="animation-delay:20ms"
+	/>
+
 	<!-- info header -->
 	<p class="rise mt-6" style="animation-delay:60ms">
 		<span class="text-accent">{prompt}</span>
