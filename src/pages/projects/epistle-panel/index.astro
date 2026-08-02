@@ -3,10 +3,9 @@ import Project from "@/components/pages/project/index.astro";
 import Base from "@/layouts/base/index.astro";
 import { getDictionary } from "@/lib/i18n";
 
-const locale = "es" as const;
-const project = "mail" as const;
+const locale = "en" as const;
 const t = getDictionary(locale);
-const p = t.projects[project];
+const p = t.epistlePanel;
 ---
 
 <Base locale={locale} title={`${p.name} — ${t.site.name}`} description={p.tagline}>

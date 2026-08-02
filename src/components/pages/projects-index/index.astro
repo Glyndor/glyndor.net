@@ -9,7 +9,16 @@ interface Props {
 const { locale } = Astro.props;
 const t = getDictionary(locale);
 
-const projectKeys = ["panel", "podup", "mail"] as const;
+const projectKeys = [
+	"podup",
+	"helmly",
+	"epistle",
+	"authcore",
+	"unitpm",
+	"klyradb",
+	"specio",
+	"viden",
+] as const;
 const projects = projectKeys.map((key, index) => ({
 	key,
 	index: String(index + 1).padStart(2, "0"),
@@ -23,7 +32,6 @@ const dotClass = (status: string) =>
 			? "bg-accent text-accent"
 			: "bg-signal-amber text-signal-amber";
 
-const featured = t.transparencia;
 const prompt = "guest@glyndor:~$";
 ---
 
@@ -88,28 +96,10 @@ const prompt = "guest@glyndor:~$";
 		</p>
 
 		<div
-			class="rise mt-4 border-y border-border text-sm"
+			class="rise mt-4 border-y border-border px-2 py-6 text-sm text-muted-foreground/70"
 			style="animation-delay:300ms"
 		>
-			<a
-				href={localizePath("/projects/transparencia", locale)}
-				class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 px-2 py-6 transition-colors hover:bg-accent-soft sm:grid-cols-[1.5rem_9rem_1fr_auto]"
-			>
-				<span class="text-muted-foreground/60">★</span>
-				<span class="flex items-center gap-2 font-semibold text-foreground group-hover:text-accent">
-					<span
-						class={`size-2 rounded-full shadow-[0_0_8px_currentColor] ${dotClass(featured.status)}`}
-					></span>
-					transparencia/
-				</span>
-				<span class="col-span-2 text-muted-foreground sm:col-span-1">
-					{featured.tagline}
-					<span class="ml-2 whitespace-nowrap text-xs text-accent">{t.common.runsOn}</span>
-				</span>
-				<span class="hidden self-center text-xs uppercase tracking-wider text-muted-foreground transition-colors group-hover:text-accent sm:inline">
-					{t.statuses[featured.status]}
-				</span>
-			</a>
+			total 0 — {t.home.showcase.subheading}
 		</div>
 	</div>
 </section>
