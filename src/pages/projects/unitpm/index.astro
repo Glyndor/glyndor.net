@@ -4,8 +4,9 @@ import Base from "@/layouts/base/index.astro";
 import { getDictionary } from "@/lib/i18n";
 
 const locale = "en" as const;
+const project = "unitpm" as const;
 const t = getDictionary(locale);
-const p = t.mailPanel;
+const p = t.projects[project];
 ---
 
 <Base locale={locale} title={`${p.name} — ${t.site.name}`} description={p.tagline}>

@@ -11,7 +11,7 @@ const { locale } = Astro.props;
 const t = getDictionary(locale);
 
 const prompt = "guest@glyndor:~$";
-const podupVersion = getVersion("Glyndor/podup") ?? t.projects.podup.version;
+const podupVersion = getVersion("Glyndor/podup");
 
 const dotClass = (status: string) =>
 	status === "released"
@@ -20,28 +20,17 @@ const dotClass = (status: string) =>
 			? "text-accent"
 			: "text-signal-amber";
 
-const panel = t.projects.panel;
 const podup = t.projects.podup;
-const mail = t.projects.mail;
-const tp = t.transparencia;
+const helmly = t.projects.helmly;
+const epistle = t.projects.epistle;
+const authcore = t.projects.authcore;
+const unitpm = t.projects.unitpm;
+const klyradb = t.projects.klyradb;
+const specio = t.projects.specio;
+const viden = t.projects.viden;
 
 // Precomputed `tree ./projects` rows.
 const tree = [
-	{
-		c: "├──",
-		name: "panel/",
-		href: localizePath("/projects/panel", locale),
-		desc: panel.tagline,
-		status: t.statuses[panel.status],
-		dot: dotClass(panel.status),
-	},
-	{
-		c: "│   └──",
-		name: "panel-agent",
-		href: localizePath("/projects/panel-agent", locale),
-		desc: "component · signed agent over WireGuard + mTLS",
-		component: true,
-	},
 	{
 		c: "├──",
 		name: "podup/",
@@ -54,26 +43,73 @@ const tree = [
 	},
 	{
 		c: "├──",
-		name: "mail/",
-		href: localizePath("/projects/mail", locale),
-		desc: mail.tagline,
-		status: t.statuses[mail.status],
-		dot: dotClass(mail.status),
+		name: "helmly/",
+		href: localizePath("/projects/helmly", locale),
+		desc: helmly.tagline,
+		status: t.statuses[helmly.status],
+		dot: dotClass(helmly.status),
 	},
 	{
 		c: "│   └──",
-		name: "mail-panel",
-		href: localizePath("/projects/mail-panel", locale),
-		desc: "component · admin UI on the mail API",
+		name: "helmly-agent",
+		href: localizePath("/projects/helmly-agent", locale),
+		desc: "component · signed agent over WireGuard + mTLS",
 		component: true,
 	},
 	{
+		c: "├──",
+		name: "epistle/",
+		href: localizePath("/projects/epistle", locale),
+		desc: epistle.tagline,
+		status: t.statuses[epistle.status],
+		dot: dotClass(epistle.status),
+	},
+	{
+		c: "│   └──",
+		name: "epistle-panel",
+		href: localizePath("/projects/epistle-panel", locale),
+		desc: "component · admin UI on the epistle API",
+		component: true,
+	},
+	{
+		c: "├──",
+		name: "authcore/",
+		href: localizePath("/projects/authcore", locale),
+		desc: authcore.tagline,
+		status: t.statuses[authcore.status],
+		dot: dotClass(authcore.status),
+	},
+	{
+		c: "├──",
+		name: "unitpm/",
+		href: localizePath("/projects/unitpm", locale),
+		desc: unitpm.tagline,
+		status: t.statuses[unitpm.status],
+		dot: dotClass(unitpm.status),
+	},
+	{
+		c: "├──",
+		name: "klyradb/",
+		href: localizePath("/projects/klyradb", locale),
+		desc: klyradb.tagline,
+		status: t.statuses[klyradb.status],
+		dot: dotClass(klyradb.status),
+	},
+	{
+		c: "├──",
+		name: "specio/",
+		href: localizePath("/projects/specio", locale),
+		desc: specio.tagline,
+		status: t.statuses[specio.status],
+		dot: dotClass(specio.status),
+	},
+	{
 		c: "└──",
-		name: "transparencia/",
-		href: localizePath("/projects/transparencia", locale),
-		desc: tp.tagline,
-		status: t.statuses[tp.status],
-		dot: dotClass(tp.status),
+		name: "viden/",
+		href: localizePath("/projects/viden", locale),
+		desc: viden.tagline,
+		status: t.statuses[viden.status],
+		dot: dotClass(viden.status),
 	},
 ];
 
@@ -200,48 +236,16 @@ const banner = ` ██████╗ ██╗  ██╗   ██╗███
 		</div>
 	</div>
 
-	<!-- systemctl status transparencia (dogfooding, raw) -->
+	<!-- showcase: empty until something ships on Glyndor -->
 	<div class="mt-20 border-t border-border pt-10">
 		<p>
 			<span class="text-accent">{prompt}</span>
-			<span class="ml-2 text-foreground">systemctl status transparencia</span>
+			<span class="ml-2 text-foreground">systemctl list-units --type=service glyndor-*</span>
 		</p>
 		<div class="mt-3 space-y-1">
-			<p class="flex flex-wrap items-center gap-2">
-				<span class={dotClass(tp.status)}>●</span>
-				<span class="font-semibold text-foreground">transparencia.service</span>
-				<span class="text-muted-foreground">— {tp.tagline}</span>
-			</p>
-			<p class="pl-4 text-muted-foreground">
-				<span class="text-muted-foreground/60">Loaded:</span>
-				<span class="text-accent">{t.common.runsOn}</span>
-			</p>
-			<p class="pl-4 text-muted-foreground">
-				<span class="text-muted-foreground/60">Active:</span>
-				<span class="text-signal-amber">{t.statuses[tp.status]}</span> · {tp.scope}
-			</p>
-			<p class="pl-4 text-muted-foreground">
-				<span class="text-muted-foreground/60">Tasks:</span>
-				{tp.features.length} — {tp.features.join(", ").toLowerCase()}
-			</p>
-			<p class="flex flex-col gap-1 pt-3 pl-4 sm:flex-row sm:gap-8">
-				<a
-					href={tp.url}
-					target="_blank" rel="noopener"
-					class="group text-foreground transition-colors hover:text-accent"
-				>
-					<span class="text-accent">$</span> open {tp.url.replace("https://", "")}
-					<span class="text-muted-foreground/50 transition-colors group-hover:text-accent"
-						>↗</span
-					>
-				</a>
-				<a
-					href={localizePath("/projects/transparencia", locale)}
-					class="group text-muted-foreground transition-colors hover:text-foreground"
-				>
-					<span class="text-accent">$</span> {t.common.learnMore}
-				</a>
-			</p>
+			<p class="text-muted-foreground/70"># {t.home.showcase.heading}</p>
+			<p class="max-w-2xl text-muted-foreground">{t.home.showcase.subheading}</p>
+			<p class="pt-2 text-muted-foreground/50">0 loaded units listed.</p>
 		</div>
 	</div>
 </div>
