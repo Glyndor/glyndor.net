@@ -188,23 +188,57 @@ const softwareApplicationLd = {
 					</span>
 				</a>
 				{charts && (
-					<>
-						<BenchmarkChart
-							title={t.common.memoryUsage}
-							tableLabel={t.common.viewAsTable}
-							scenarioLabel={t.common.scenario}
-							baseDelay={280}
-							{...charts.memory}
-						/>
-						<BenchmarkChart
-							title={t.common.wallClockTime}
-							caption={t.common.logScaleCaption}
-							tableLabel={t.common.viewAsTable}
-							scenarioLabel={t.common.scenario}
-							baseDelay={280 + charts.memory.categories.length * 70 + 200}
-							{...charts.time}
-						/>
-					</>
+					<div class="mt-6">
+						<div role="tablist" aria-label={t.common.benchmarkMetric} class="flex flex-wrap gap-1">
+							<button
+								type="button"
+								role="tab"
+								id="chart-tab-0"
+								aria-selected="true"
+								aria-controls="chart-panel-0"
+								tabindex={0}
+								data-chart-tab="0"
+								class="chart-tab border border-b-0 border-border-strong px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground transition-colors aria-selected:bg-card/50 aria-selected:text-foreground"
+							>
+								{t.common.memoryUsage}
+							</button>
+							<button
+								type="button"
+								role="tab"
+								id="chart-tab-1"
+								aria-selected="false"
+								aria-controls="chart-panel-1"
+								tabindex={-1}
+								data-chart-tab="1"
+								class="chart-tab border border-b-0 border-border-strong px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground transition-colors aria-selected:bg-card/50 aria-selected:text-foreground"
+							>
+								{t.common.wallClockTime}
+							</button>
+						</div>
+						<div class="border border-border-strong px-3 py-3">
+							<div id="chart-panel-0" role="tabpanel" aria-labelledby="chart-tab-0">
+								<BenchmarkChart
+									compact
+									title={t.common.memoryUsage}
+									tableLabel={t.common.viewAsTable}
+									scenarioLabel={t.common.scenario}
+									baseDelay={280}
+									{...charts.memory}
+								/>
+							</div>
+							<div id="chart-panel-1" role="tabpanel" aria-labelledby="chart-tab-1" hidden>
+								<BenchmarkChart
+									compact
+									title={t.common.wallClockTime}
+									caption={t.common.logScaleCaption}
+									tableLabel={t.common.viewAsTable}
+									scenarioLabel={t.common.scenario}
+									baseDelay={280}
+									{...charts.time}
+								/>
+							</div>
+						</div>
+					</div>
 				)}
 			</div>
 		)
@@ -311,3 +345,31 @@ const softwareApplicationLd = {
 		</a>
 	</div>
 </article>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-chart-tab]"));
+		if (tabs.length === 0) return;
+
+		function select(index: number) {
+			tabs.forEach((tab, i) => {
+				const active = i === index;
+				tab.setAttribute("aria-selected", String(active));
+				tab.tabIndex = active ? 0 : -1;
+				const panel = document.getElementById(tab.getAttribute("aria-controls") ?? "");
+				if (panel) panel.hidden = !active;
+			});
+		}
+
+		tabs.forEach((tab, i) => {
+			tab.addEventListener("click", () => select(i));
+			tab.addEventListener("keydown", (e) => {
+				if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+				e.preventDefault();
+				const next = e.key === "ArrowRight" ? (i + 1) % tabs.length : (i - 1 + tabs.length) % tabs.length;
+				select(next);
+				tabs[next].focus();
+			});
+		});
+	});
+</script>
