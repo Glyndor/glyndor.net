@@ -147,9 +147,13 @@ const softwareApplicationLd = {
 		</p>
 		<ul class="mt-2 grid gap-1 sm:grid-cols-2">
 			{
-				data.features.map((feature) => (
-					<li class="text-muted-foreground">
-						<span class="text-accent">›</span> {feature}
+				data.features.map((feature, i) => (
+					<li
+						class="stream group flex items-baseline gap-2 px-2 py-1 text-muted-foreground transition-colors hover:bg-accent-soft hover:text-foreground"
+						style={`animation-delay:${280 + i * 70}ms`}
+					>
+						<span class="text-accent transition-transform group-hover:translate-x-0.5">›</span>
+						{feature}
 					</li>
 				))
 			}
