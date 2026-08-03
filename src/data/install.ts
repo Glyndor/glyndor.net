@@ -19,7 +19,7 @@ export const installMethods: Record<string, InstallMethod[]> = {
 			os: "linux",
 			platform: "Ubuntu / Debian",
 			command:
-				"curl -fsSLO https://apt.glyndor.net/glyndor-archive-keyring.deb && sudo dpkg -i glyndor-archive-keyring.deb && rm glyndor-archive-keyring.deb && sudo apt update && sudo apt install podup",
+				"curl -fsSLO https://apt.glyndor.net/glyndor-archive-keyring.deb &&\nsudo dpkg -i glyndor-archive-keyring.deb &&\nrm glyndor-archive-keyring.deb &&\nsudo apt update &&\nsudo apt install podup",
 		},
 		{
 			label: "brew",
