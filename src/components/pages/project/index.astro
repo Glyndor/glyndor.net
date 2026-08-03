@@ -84,7 +84,7 @@ const softwareApplicationLd = {
 
 	<div class="rise mt-3" style="animation-delay:120ms">
 		<p class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-			<span class={dotClass}>●</span>
+			<span class={`size-2 rounded-full shadow-[0_0_8px_currentColor] ${dotClass}`} />
 			{t.statuses[data.status]}
 			{version && <span class="text-accent">· {version}</span>}
 		</p>
@@ -186,7 +186,7 @@ const softwareApplicationLd = {
 			<div class="flex gap-3">
 				<dt class="w-24 shrink-0 text-muted-foreground/80">{t.common.status}</dt>
 				<dd class="flex items-center gap-2">
-					<span class={dotClass}>●</span>
+					<span class={`size-2 rounded-full shadow-[0_0_8px_currentColor] ${dotClass}`} />
 					{t.statuses[data.status]}
 				</dd>
 			</div>

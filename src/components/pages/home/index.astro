@@ -178,7 +178,11 @@ const banner = ` ██████╗ ██╗  ██╗   ██╗███
 									: "font-semibold text-foreground group-hover:text-accent"
 							}
 						>
-							{!row.component && <span class={`${row.dot} mr-1`}>●</span>}
+							{!row.component && (
+								<span
+									class={`mr-1.5 inline-block size-2 rounded-full shadow-[0_0_8px_currentColor] ${row.dot}`}
+								/>
+							)}
 							{row.name}
 						</span>
 						<span class="col-span-2 truncate text-muted-foreground/80 sm:col-span-1">
