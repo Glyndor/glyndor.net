@@ -24,6 +24,10 @@ interface ProjectData {
 		repo: string;
 		status?: StatusKey;
 	}[];
+	benchmarks?: {
+		highlight: string;
+		url: string;
+	};
 }
 
 interface Props {
@@ -159,6 +163,30 @@ const softwareApplicationLd = {
 			}
 		</ul>
 	</div>
+
+	<!-- benchmarks -->
+	{
+		data.benchmarks && (
+			<div class="rise mt-10" style="animation-delay:240ms">
+				<p>
+					<span class="text-accent">{prompt}</span>
+					<span class="ml-2 text-foreground">cat ./benchmarks</span>
+				</p>
+				<p class="mt-2 max-w-3xl text-muted-foreground">{data.benchmarks.highlight}</p>
+				<a
+					href={data.benchmarks.url}
+					target="_blank" rel="noopener"
+					class="group mt-2 inline-block text-accent transition-colors hover:underline"
+				>
+					{t.common.fullBenchmarks}
+					<span class="text-muted-foreground/50 transition-colors group-hover:text-accent">
+						{" "}
+						↗
+					</span>
+				</a>
+			</div>
+		)
+	}
 
 	<!-- components -->
 	{

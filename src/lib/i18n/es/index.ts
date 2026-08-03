@@ -26,6 +26,7 @@ export const es: Dictionary = {
 		features: "Características",
 		components: "Componentes",
 		componentOf: "Componente de",
+		fullBenchmarks: "Ver todos los benchmarks y la metodología",
 	},
 	home: {
 		hero: {
@@ -110,6 +111,11 @@ export const es: Dictionary = {
 			],
 			status: "released",
 			repo: "https://github.com/Glyndor/podup",
+			benchmarks: {
+				highlight:
+					"Un solo up: 8.1 MiB / 6.0 ms, contra 29.8 MiB / 30.4 ms de docker-compose y 52.9 MiB / 469.7 ms de podman-compose — podup corre como un binario estático que habla directo con el servicio de Podman.",
+				url: "https://github.com/Glyndor/podup/blob/main/docs/benchmarks.md",
+			},
 		},
 		epistle: {
 			name: "epistle",
