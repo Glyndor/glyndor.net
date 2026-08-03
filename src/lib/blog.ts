@@ -21,3 +21,9 @@ export async function getBlogProjects(locale: Locale): Promise<string[]> {
 	}
 	return Array.from(projects).sort();
 }
+
+// Every release-note post title ends in its semver ("podup 3.5.0"); pull
+// that back out to badge the shared banner image per version.
+export function extractVersion(title: string): string | null {
+	return title.match(/\d+\.\d+\.\d+$/)?.[0] ?? null;
+}
