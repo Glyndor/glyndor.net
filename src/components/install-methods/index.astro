@@ -19,14 +19,14 @@ const osIcon = { linux: Linux, macos: Apple, windows: Windows, go: null } as con
 		methods.map((method) => {
 			const Icon = osIcon[method.os];
 			return (
-				<div class="border border-border">
-					<div class="flex items-center gap-2 border-b border-border bg-card/50 px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground">
+				<div class="border border-border-strong">
+					<div class="flex items-center gap-2 border-b border-border-strong bg-card/50 px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground">
 						{Icon ? <Icon class="size-3.5" /> : <span class="font-semibold text-accent">Go</span>}
 						{method.label}
 						<button
 							type="button"
 							data-copy={method.command}
-							class="group ml-auto flex items-center gap-1 text-muted-foreground transition-colors hover:text-accent"
+							class="group ml-auto flex items-center gap-1 p-1.5 text-muted-foreground transition-colors hover:text-accent"
 							aria-label={`Copy: ${method.command}`}
 						>
 							<Copy class="icon-copy size-3.5" />
