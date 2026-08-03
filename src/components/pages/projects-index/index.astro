@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "@/lib/i18n";
 import { getDictionary, localizePath } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
 
 interface Props {
 	locale: Locale;
@@ -65,7 +66,7 @@ const prompt = "guest@glyndor:~$";
 						<span class="text-muted-foreground/60">{project.index}</span>
 						<span class="flex items-center gap-2 font-semibold text-foreground group-hover:text-accent">
 							<span
-								class={`size-2 rounded-full shadow-[0_0_8px_currentColor] ${dotClass(project.status)}`}
+								class={cn("size-2 rounded-full shadow-[0_0_8px_currentColor]", dotClass(project.status))}
 							/>
 							{project.key}/
 						</span>
