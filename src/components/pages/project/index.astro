@@ -22,6 +22,7 @@ interface ProjectData {
 		name: string;
 		description: string;
 		repo: string;
+		status?: StatusKey;
 	}[];
 }
 
@@ -43,14 +44,19 @@ const version = getVersion(repoPath) ?? data.version ?? null;
 const platformHost = url ? url.replace("https://", "") : null;
 const slug = repoPath.split("/").pop();
 const prompt = "guest@glyndor:~$";
-const dotClass =
-	data.status === "released"
-		? "text-signal-green"
-		: data.status === "comingSoon"
+const dotClass = (status: StatusKey) =>
+	status === "released"
+		? "text-signal-green dot-pulse"
+		: status === "comingSoon"
 			? "text-accent"
 			: "text-signal-amber";
 
 const install = slug ? (installMethods[slug] ?? []) : [];
+
+const componentRows = components.map((component) => ({
+	...component,
+	version: getVersion(component.repo.replace("https://github.com/", "")),
+}));
 
 const isBrowserExtension = slug === "specio" || slug === "viden";
 const softwareApplicationLd = {
@@ -85,9 +91,14 @@ const softwareApplicationLd = {
 
 	<div class="rise mt-3" style="animation-delay:120ms">
 		<p class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-			<span class={cn("size-2 rounded-full shadow-[0_0_8px_currentColor]", dotClass)} />
+			<span
+				class={cn(
+					"size-2 rounded-full bg-current shadow-[0_0_8px_currentColor]",
+					dotClass(data.status),
+				)}
+			/>
 			{t.statuses[data.status]}
-			{version && <span class="text-accent">· {version}</span>}
+			{version && <span class="font-semibold text-accent">· {version}</span>}
 		</p>
 		<h1 class="mt-3 text-3xl font-semibold sm:text-4xl">
 			<span class="text-muted-foreground/40">~/</span>{data.name}
@@ -146,29 +157,50 @@ const softwareApplicationLd = {
 
 	<!-- components -->
 	{
-		components.length > 0 && (
+		componentRows.length > 0 && (
 			<div class="rise mt-10" style="animation-delay:260ms">
 				<p>
 					<span class="text-accent">{prompt}</span>
 					<span class="ml-2 text-foreground">ls ./components</span>
 				</p>
 				<div class="mt-2 space-y-1">
-					{components.map((component, i) => (
+					{componentRows.map((component, i) => (
 						<a
 							href={localizePath(`/projects/${component.name}`, locale)}
-							class="group grid grid-cols-[auto_1fr] gap-x-2 hover:bg-accent-soft sm:grid-cols-[auto_9rem_1fr_auto]"
+							class="group grid grid-cols-[auto_1fr] items-center gap-x-2 hover:bg-accent-soft sm:grid-cols-[auto_9rem_1fr_auto]"
 						>
 							<span class="whitespace-pre text-muted-foreground/50">
-								{i === components.length - 1 ? "└──" : "├──"}{" "}
+								{i === componentRows.length - 1 ? "└──" : "├──"}{" "}
 							</span>
-							<span class="font-semibold text-foreground group-hover:text-accent">
+							<span class="flex items-center font-semibold text-foreground group-hover:text-accent">
+								{component.status && (
+									<span
+										class={cn(
+											"mr-1.5 inline-block size-2 rounded-full bg-current shadow-[0_0_8px_currentColor]",
+											dotClass(component.status),
+										)}
+									/>
+								)}
 								{component.name}
 							</span>
 							<span class="col-span-2 text-muted-foreground/80 sm:col-span-1">
 								{component.description}
 							</span>
-							<span class="hidden whitespace-nowrap text-xs text-muted-foreground transition-colors group-hover:text-accent sm:inline">
-								[{t.common.viewProject}]
+							<span class="hidden whitespace-nowrap text-xs uppercase tracking-wider text-muted-foreground sm:inline">
+								{component.status ? (
+									<>
+										[{t.statuses[component.status]}
+										{component.version && (
+											<>
+												{" · "}
+												<span class="font-semibold text-accent">{component.version}</span>
+											</>
+										)}
+										]
+									</>
+								) : (
+									`[${t.common.viewProject}]`
+								)}
 							</span>
 						</a>
 					))}
@@ -187,7 +219,12 @@ const softwareApplicationLd = {
 			<div class="flex gap-3">
 				<dt class="w-24 shrink-0 text-muted-foreground/80">{t.common.status}</dt>
 				<dd class="flex items-center gap-2">
-					<span class={cn("size-2 rounded-full shadow-[0_0_8px_currentColor]", dotClass)} />
+					<span
+						class={cn(
+							"size-2 rounded-full bg-current shadow-[0_0_8px_currentColor]",
+							dotClass(data.status),
+						)}
+					/>
 					{t.statuses[data.status]}
 				</dd>
 			</div>
@@ -195,7 +232,7 @@ const softwareApplicationLd = {
 				version && (
 					<div class="flex gap-3">
 						<dt class="w-24 shrink-0 text-muted-foreground/80">version</dt>
-						<dd class="text-accent">{version}</dd>
+						<dd class="font-semibold text-accent">{version}</dd>
 					</div>
 				)
 			}

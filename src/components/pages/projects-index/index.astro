@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "@/lib/i18n";
 import { getDictionary, localizePath } from "@/lib/i18n";
+import { getVersion } from "@/lib/versions";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -20,15 +21,18 @@ const projectKeys = [
 	"specio",
 	"viden",
 ] as const;
+const versionFor = (repo: string) => getVersion(repo.replace("https://github.com/", ""));
+
 const projects = projectKeys.map((key, index) => ({
 	key,
 	index: String(index + 1).padStart(2, "0"),
+	version: versionFor(t.projects[key].repo),
 	...t.projects[key],
 }));
 
 const dotClass = (status: string) =>
 	status === "released"
-		? "bg-signal-green text-signal-green"
+		? "bg-signal-green text-signal-green dot-pulse"
 		: status === "comingSoon"
 			? "bg-accent text-accent"
 			: "bg-signal-amber text-signal-amber";
@@ -74,13 +78,24 @@ const prompt = "guest@glyndor:~$";
 							{project.tagline}
 							{"components" in project &&
 								project.components.map((c) => (
-									<span class="ml-2 whitespace-nowrap text-xs text-muted-foreground/80">
+									<span class="ml-2 inline-flex items-center gap-1 whitespace-nowrap text-xs text-muted-foreground/80">
+										{c.status && (
+											<span
+												class={cn("size-1.5 rounded-full shadow-[0_0_6px_currentColor]", dotClass(c.status))}
+											/>
+										)}
 										+{c.name}
 									</span>
 								))}
 						</span>
-						<span class="hidden self-center text-xs uppercase tracking-wider text-muted-foreground transition-colors group-hover:text-accent sm:inline">
+						<span class="hidden self-center whitespace-nowrap text-xs uppercase tracking-wider text-muted-foreground transition-colors group-hover:text-accent sm:inline">
 							{t.statuses[project.status]}
+							{project.version && (
+								<>
+									{" · "}
+									<span class="font-semibold text-accent">{project.version}</span>
+								</>
+							)}
 						</span>
 					</a>
 				))
