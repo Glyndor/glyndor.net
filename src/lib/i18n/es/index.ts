@@ -42,7 +42,11 @@ export const es: Dictionary = {
 			secure: "todo endurecido",
 		},
 		console: {
-			identity: "Infraestructura de código abierto y centrada en seguridad — tuya.",
+			identities: [
+				"Infraestructura de código abierto y centrada en seguridad — tuya.",
+				"Autoalojada. Reforzada por defecto.",
+				"Construida a nivel ASVS 3, no solo prometida.",
+			],
 			hint: "selecciona un proyecto para inspeccionar",
 		},
 		projects: {

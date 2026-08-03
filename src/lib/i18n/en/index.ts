@@ -43,7 +43,11 @@ export const en = {
 			secure: "all systems hardened",
 		},
 		console: {
-			identity: "Open-source, security-first infrastructure — yours to own.",
+			identities: [
+				"Open-source, security-first infrastructure — yours to own.",
+				"Self-hosted. Hardened by default.",
+				"Built to ASVS Level 3, not just claimed.",
+			],
 			hint: "select a project to inspect",
 		},
 		projects: {
