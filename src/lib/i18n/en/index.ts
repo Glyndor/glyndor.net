@@ -28,6 +28,11 @@ export const en = {
 		components: "Components",
 		componentOf: "Component of",
 		fullBenchmarks: "Full benchmarks and methodology",
+		memoryUsage: "Memory usage",
+		wallClockTime: "Wall-clock time",
+		logScaleCaption: "Log scale — each gridline is 10× the last.",
+		scenario: "scenario",
+		viewAsTable: "View as table",
 	},
 	home: {
 		hero: {
