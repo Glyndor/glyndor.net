@@ -27,6 +27,7 @@ export const en = {
 		features: "Features",
 		components: "Components",
 		componentOf: "Component of",
+		fullBenchmarks: "Full benchmarks and methodology",
 	},
 	home: {
 		hero: {
@@ -109,6 +110,11 @@ export const en = {
 			],
 			status: "released" as StatusKey,
 			repo: "https://github.com/Glyndor/podup",
+			benchmarks: {
+				highlight:
+					"Single up: 8.1 MiB / 6.0 ms, vs. 29.8 MiB / 30.4 ms for docker-compose and 52.9 MiB / 469.7 ms for podman-compose — podup runs as a static binary talking directly to the Podman service.",
+				url: "https://github.com/Glyndor/podup/blob/main/docs/benchmarks.md",
+			},
 		},
 		epistle: {
 			name: "epistle",
