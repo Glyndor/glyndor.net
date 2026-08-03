@@ -36,6 +36,7 @@ export function getLocaleFromUrl(url: URL): Locale {
 const routeSlugs: Record<string, Partial<Record<Locale, string>>> = {
 	projects: { es: "proyectos" },
 	support: { es: "apoyar" },
+	blog: { es: "blog" },
 };
 
 function translateSegment(segment: string, locale: Locale): string {

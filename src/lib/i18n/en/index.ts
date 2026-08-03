@@ -12,6 +12,7 @@ export const en = {
 	nav: {
 		home: "Home",
 		projects: "Projects",
+		blog: "Blog",
 		support: "Support",
 		github: "GitHub",
 	},
@@ -74,6 +75,16 @@ export const en = {
 	projectsIndex: {
 		title: "Projects",
 		subtitle: "Open-source building blocks for self-hosted infrastructure.",
+	},
+	blog: {
+		title: "Blog",
+		subtitle: "Releases and news from across Glyndor.",
+		empty: "No posts yet.",
+		allTopics: "all",
+		backToBlog: "Back to blog",
+		published: "Published",
+		relatedProject: "About",
+		readMore: "Read post",
 	},
 	statuses: {
 		inDevelopment: "In development",

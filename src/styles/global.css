@@ -333,6 +333,96 @@
 	}
 }
 
+/* Rendered blog-post Markdown -- no typography plugin, just enough to make
+   headings/links/lists/code readable inside the terminal aesthetic. */
+.post-content {
+	color: var(--foreground);
+}
+
+.post-content > * + * {
+	margin-top: 1em;
+}
+
+.post-content h2 {
+	margin-top: 2em;
+	font-size: 1.25em;
+	font-weight: 600;
+}
+
+.post-content h3 {
+	margin-top: 1.5em;
+	font-size: 1.1em;
+	font-weight: 600;
+}
+
+.post-content p {
+	color: var(--muted-foreground);
+	line-height: 1.7;
+}
+
+.post-content a {
+	color: var(--accent);
+	text-underline-offset: 2px;
+}
+
+.post-content a:hover {
+	text-decoration: underline;
+}
+
+.post-content ul,
+.post-content ol {
+	margin-left: 1.25em;
+	color: var(--muted-foreground);
+}
+
+.post-content ul {
+	list-style: none;
+}
+
+.post-content ul > li {
+	position: relative;
+}
+
+.post-content ul > li::before {
+	content: "›";
+	position: absolute;
+	left: -1.25em;
+	color: var(--accent);
+}
+
+.post-content ol {
+	list-style: decimal;
+}
+
+.post-content code {
+	background: var(--card);
+	padding: 0.15em 0.4em;
+	font-size: 0.9em;
+}
+
+.post-content pre {
+	overflow-x: auto;
+	border: 1px solid var(--border-strong);
+	background: var(--card);
+	padding: 0.75em 1em;
+}
+
+.post-content pre code {
+	background: none;
+	padding: 0;
+}
+
+.post-content blockquote {
+	border-left: 2px solid var(--border-strong);
+	padding-left: 1em;
+	color: var(--muted-foreground);
+}
+
+.post-content strong {
+	color: var(--foreground);
+	font-weight: 600;
+}
+
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,
