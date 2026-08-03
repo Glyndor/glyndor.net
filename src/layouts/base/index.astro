@@ -1,5 +1,6 @@
 ---
 import SiteFooter from "@/components/site-footer/index.astro";
+import SiteFooterNav from "@/components/site-footer-nav/index.astro";
 import SiteHeader from "@/components/site-header/index.astro";
 import type { Locale } from "@/lib/i18n";
 import { defaultLocale, getDictionary, locales, localizePath, stripLocale } from "@/lib/i18n";
@@ -98,6 +99,7 @@ const ogImage = new URL(og.src, Astro.site).href;
 		<SiteHeader locale={locale} />
 		<main class="flex-1 overflow-x-hidden overflow-y-auto">
 			<slot />
+			<SiteFooterNav locale={locale} />
 		</main>
 		<SiteFooter locale={locale} />
 	</body>
