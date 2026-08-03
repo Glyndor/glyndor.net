@@ -5,6 +5,8 @@ title: "podup 3.4.0"
 description: "podup build ahora escribe a stderr en vez de stdout, y up/down/pull/build ahora muestran un tablero en vivo en la terminal."
 date: 2026-07-30
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 3.4.0. Casi todo lo que trae es salida de línea de comandos — la API de la librería no cambió, y `cargo semver-checks` pasó en cada pull request de este release.

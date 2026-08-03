@@ -5,6 +5,8 @@ title: "podup 1.9.0"
 description: "podup autostart gains service mode, compose now warns on unknown nested keys, and the release signing key was rotated."
 date: 2026-07-15
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c", "dependabot[bot]"]
 ---
 
 podup 1.9.0 is out. Three things worth calling out:

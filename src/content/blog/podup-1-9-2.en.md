@@ -5,6 +5,8 @@ title: "podup 1.9.2"
 description: "Fixes the short tmpfs form in compose files, which was silently dropping its options."
 date: 2026-07-15
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 1.9.2 is out. One fix worth calling out:

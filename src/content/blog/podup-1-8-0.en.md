@@ -5,6 +5,8 @@ title: "podup 1.8.0"
 description: "Scaled replica names are now always index-suffixed, matching docker/podman-compose naming."
 date: 2026-06-29
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 1.8.0 is out. One real fix:

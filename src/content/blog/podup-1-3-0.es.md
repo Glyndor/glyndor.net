@@ -5,6 +5,8 @@ title: "podup 1.3.0"
 description: "Podman 5 ya es el piso de API exigido, más paridad CLI con docker-compose, labels de propiedad en quadlet, y un fix de seguridad que limita la lectura de secrets de build."
 date: 2026-06-24
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 1.3.0. Lo más destacado:

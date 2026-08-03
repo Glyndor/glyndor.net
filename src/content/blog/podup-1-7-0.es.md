@@ -5,6 +5,8 @@ title: "podup 1.7.0"
 description: "Un barrido de correcciones de 220 hallazgos en todo el CLI, más operaciones de lifecycle en paralelo, salida de progreso y mejor renderizado de tablas."
 date: 2026-06-29
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c", "dependabot[bot]"]
 ---
 
 Salió podup 1.7.0. Esta versión integra un barrido de correcciones amplio — 220 hallazgos verificados en toda la superficie del CLI (réplicas, restart policy, profiles, señales, watch, volúmenes, redes, update, creación de contenedores, build, formato de salida, archivos env, parseo de compose, lifecycle up/down, run/exec/cp, mensajes de error, flags del CLI, y más), cada área corregida y verificada por separado.

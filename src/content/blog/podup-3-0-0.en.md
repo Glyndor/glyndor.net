@@ -5,6 +5,8 @@ title: "podup 3.0.0"
 description: "Breaking change: compose option enums are now non-exhaustive. Also new: interactive exec and run on Windows."
 date: 2026-07-23
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 3.0.0 is out. This is a major version bump with a breaking change:

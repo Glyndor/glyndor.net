@@ -1,0 +1,22 @@
+---
+import BlogIndex from "@/components/pages/blog-index/index.astro";
+import Base from "@/layouts/base/index.astro";
+import { getDictionary } from "@/lib/i18n";
+import { getBlogProjects, getPostsByLocale } from "@/lib/blog";
+import type { PaginateFunction } from "astro";
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+	// Inline the locale literal -- see the en route for why.
+	const posts = await getPostsByLocale("es");
+	return paginate(posts, { pageSize: 10 });
+}
+
+const locale = "es" as const;
+const t = getDictionary(locale);
+const { page } = Astro.props;
+const projects = await getBlogProjects(locale);
+---
+
+<Base locale={locale} title={`${t.blog.title} — ${t.site.name}`} description={t.blog.subtitle}>
+	<BlogIndex locale={locale} page={page} projects={projects} activeProject={null} />
+</Base>

@@ -5,6 +5,8 @@ title: "podup 3.5.0"
 description: "ps, images, and events output gained new columns, shifting table layout; --format json stays a compatible superset."
 date: 2026-08-03
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 3.5.0 is out. The `ps`, `images`, and `events` tables changed shape — read this before anything of yours parses them by column position.

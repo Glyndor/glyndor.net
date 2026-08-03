@@ -5,6 +5,8 @@ title: "podup 3.4.1"
 description: "top ya no aborta con un contenedor detenido, y el teardown de secrets es más rápido."
 date: 2026-08-01
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 3.4.1. Dos cosas para destacar:

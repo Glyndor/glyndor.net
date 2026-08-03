@@ -5,6 +5,8 @@ title: "podup 1.10.1"
 description: "podup se relicenció de Apache-2.0 a MIT — sin cambios de código en este release."
 date: 2026-07-17
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 1.10.1. Este release es enteramente un cambio de licencia: podup ahora es MIT, antes Apache-2.0.

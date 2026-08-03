@@ -1,0 +1,8 @@
+# Local preview only -- see compose.yaml. Mirrors the "clean URL" (no
+# trailing slash, no .html) resolution a real static host needs to serve
+# an Astro build with trailingSlash: "never" + build.format: "file".
+:80 {
+	root * /usr/share/caddy
+	try_files {path} {path}.html {path}/index.html
+	file_server
+}

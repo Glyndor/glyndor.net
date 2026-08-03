@@ -5,6 +5,8 @@ title: "podup 1.12.0"
 description: "Fixes quadlet permissions and a cp chmod bug, makes five commands fail correctly instead of lying, and validates Podman 6.0.1 as the baseline engine."
 date: 2026-07-20
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 1.12.0 is out. A few things worth calling out:

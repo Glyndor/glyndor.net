@@ -5,6 +5,8 @@ title: "podup 2.1.0"
 description: "run ya tiene una terminal real en Unix, los healthchecks de menos de un segundo se respetan, y los errores de socket dicen cuál falta y cómo activarlo."
 date: 2026-07-21
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 2.1.0. Tres cosas para destacar:

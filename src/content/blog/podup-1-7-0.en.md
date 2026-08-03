@@ -5,6 +5,8 @@ title: "podup 1.7.0"
 description: "A 220-finding correctness sweep across the whole CLI, plus parallel lifecycle ops, progress output, and better table rendering."
 date: 2026-06-29
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c", "dependabot[bot]"]
 ---
 
 podup 1.7.0 is out. This release merges a broad correctness sweep — 220 verified findings across the CLI surface (replicas, restart policy, profiles, signals, watch, volumes, networks, update, container create, build, output formatting, env files, compose parsing, lifecycle up/down, run/exec/cp, error messaging, CLI flags, and more), each fixed and checked area by area.

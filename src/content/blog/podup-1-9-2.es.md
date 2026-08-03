@@ -5,6 +5,8 @@ title: "podup 1.9.2"
 description: "Corrige la forma corta de tmpfs en archivos compose, que descartaba sus opciones en silencio."
 date: 2026-07-15
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 1.9.2. Una corrección para destacar:

@@ -5,6 +5,8 @@ title: "podup 1.9.3"
 description: "autostart ahora detiene el stack al apagar en vez de eliminarlo por completo."
 date: 2026-07-16
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 1.9.3. Un solo fix, release corta:

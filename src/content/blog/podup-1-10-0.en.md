@@ -5,6 +5,8 @@ title: "podup 1.10.0"
 description: "Service mode now supports quadlet autostart, and there's a new guide covering both rootless-autostart modes."
 date: 2026-07-17
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 1.10.0 is out. One thing worth calling out:

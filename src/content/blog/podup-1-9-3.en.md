@@ -5,6 +5,8 @@ title: "podup 1.9.3"
 description: "autostart now stops the stack on shutdown instead of removing it entirely."
 date: 2026-07-16
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 1.9.3 is out. One fix, short release:

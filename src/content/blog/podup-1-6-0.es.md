@@ -5,6 +5,8 @@ title: "podup 1.6.0"
 description: "Salida en color, límite de réplicas contra DoS por compose no confiable, y --env-file con last-file-wins."
 date: 2026-06-28
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 1.6.0. Lo más destacado:

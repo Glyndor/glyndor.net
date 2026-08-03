@@ -5,6 +5,8 @@ title: "podup 1.9.0"
 description: "podup autostart gana modo servicio, compose ahora avisa de claves desconocidas anidadas, y se rotó la clave de firma del release."
 date: 2026-07-15
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c", "dependabot[bot]"]
 ---
 
 Salió podup 1.9.0. Tres cosas para destacar:

@@ -5,6 +5,8 @@ title: "podup 3.2.0"
 description: "logs ahora sale con código distinto de cero cuando su stream se trunca, en vez de descartar la salida en silencio."
 date: 2026-07-27
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 3.2.0. Una cosa para destacar:

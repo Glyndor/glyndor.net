@@ -5,6 +5,8 @@ title: "podup 1.3.0"
 description: "Podman 5 is now the enforced API floor, plus docker-compose CLI parity, quadlet ownership labels, and a capped-read fix for build secrets."
 date: 2026-06-24
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 1.3.0 is out. The highlights:

@@ -5,6 +5,8 @@ title: "podup 1.11.1"
 description: "Un solo poller de healthcheck ahora cubre a todos los dependientes de un contenedor, el tar del build-context se transmite en vez de bufferearse, y los releases traen un SBOM por target."
 date: 2026-07-19
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 1.11.1. Tres cosas para destacar:

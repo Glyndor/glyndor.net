@@ -5,6 +5,8 @@ title: "podup 1.5.2"
 description: "podup is now validated against Podman 6.0.0 in CI, and a new daily job watches for newer packaged Podman releases."
 date: 2026-06-27
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 1.5.2 is out. Two things worth calling out:

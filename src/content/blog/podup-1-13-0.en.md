@@ -5,6 +5,8 @@ title: "podup 1.13.0"
 description: "Quadlet now discovers and merges compose override files, plus fixes for the no-TTY flag, .containerignore, silent pull failures, and logs hanging on pipe close."
 date: 2026-07-20
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 1.13.0 is out. A few things worth calling out:

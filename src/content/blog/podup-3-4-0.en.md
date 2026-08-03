@@ -5,6 +5,8 @@ title: "podup 3.4.0"
 description: "podup build now writes to stderr instead of stdout, and up/down/pull/build gained a live-updating terminal board."
 date: 2026-07-30
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 3.4.0 is out. Almost everything in it is command-line output — the library API is unchanged, and `cargo semver-checks` passed on every pull request in this release.

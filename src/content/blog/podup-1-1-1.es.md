@@ -5,6 +5,8 @@ title: "podup 1.1.1"
 description: "Los healthchecks ahora se disparan bajo demanda, así que up --wait funciona correctamente sin systemd presente."
 date: 2026-06-20
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 1.1.1. Un fix para destacar:

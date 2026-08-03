@@ -5,6 +5,8 @@ title: "podup 3.3.0"
 description: "up now skips images the host already has, and attach/run/events detect a dead stream out of band like logs and stats."
 date: 2026-07-29
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 3.3.0 is out. A few fixes worth calling out:

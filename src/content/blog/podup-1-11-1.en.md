@@ -5,6 +5,8 @@ title: "podup 1.11.1"
 description: "One healthcheck poller now covers all of a container's dependents, the build-context tar is streamed instead of buffered, and releases ship a per-target SBOM."
 date: 2026-07-19
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 1.11.1 is out. Three things worth calling out:

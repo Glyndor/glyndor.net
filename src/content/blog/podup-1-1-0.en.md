@@ -5,6 +5,8 @@ title: "podup 1.1.0"
 description: "podup reaches full docker-compose CLI flag parity, adds native libpod support and several new commands, and fixes default networking."
 date: 2026-06-19
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c", "dependabot[bot]"]
 ---
 
 podup 1.1.0 is out. This is the release where the docker-compose CLI parity epic wraps up: podup now covers the flag surface of essentially every compose command.

@@ -29,6 +29,9 @@ const blog = defineCollection({
 			project: z.string().optional(),
 			// Falls back to the general org banner when omitted.
 			banner: image().optional(),
+			// Real GitHub usernames who authored a merged PR in this release,
+			// from `gh release view --json body` -- never invented.
+			contributors: z.array(z.string()).optional(),
 		}),
 });
 

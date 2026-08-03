@@ -5,6 +5,8 @@ title: "podup 1.2.0"
 description: "Compose depends_on fixes for scaled services and extends, quadlet security_opt mapping, and signed release installers with SBOM/NOTICES."
 date: 2026-06-23
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c", "dependabot[bot]"]
 ---
 
 podup 1.2.0 is out. The highlights:

@@ -5,6 +5,8 @@ title: "podup 1.11.0"
 description: "Lifecycle commands now exit non-zero on real failures, a quadlet uninstall privilege-escalation path is closed, and teardown is parallelized."
 date: 2026-07-18
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 podup 1.11.0 is out. Highlights:

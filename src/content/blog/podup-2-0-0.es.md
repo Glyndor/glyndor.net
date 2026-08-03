@@ -5,6 +5,8 @@ title: "podup 2.0.0"
 description: "podup 2.0.0 es una versión mayor: exec/run ahora tienen una terminal real, el stop de autostart está acotado, y un up interrumpido sale con código 130."
 date: 2026-07-21
 project: podup
+banner: ../../assets/og/podup.png
+contributors: ["Jaro-c"]
 ---
 
 Salió podup 2.0.0. Es un bump de versión mayor con cuatro cambios incompatibles:
