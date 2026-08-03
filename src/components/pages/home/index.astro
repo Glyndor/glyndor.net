@@ -169,19 +169,22 @@ const banner = ` ██████╗ ██╗  ██╗   ██╗███
 				tree.map((row) => (
 					<a
 						href={row.href}
-						class="group grid grid-cols-[auto_1fr] gap-x-2 py-1 hover:bg-accent-soft sm:grid-cols-[5.5rem_11rem_1fr_auto]"
+						class="group grid grid-cols-[auto_1fr] items-center gap-x-2 py-1 hover:bg-accent-soft sm:grid-cols-[5.5rem_11rem_1fr_auto]"
 					>
 						<span class="whitespace-pre text-muted-foreground/50">{row.c} </span>
 						<span
 							class={
 								row.component
-									? "text-muted-foreground group-hover:text-accent"
-									: "font-semibold text-foreground group-hover:text-accent"
+									? "flex items-center text-muted-foreground group-hover:text-accent"
+									: "flex items-center font-semibold text-foreground group-hover:text-accent"
 							}
 						>
 							{!row.component && (
 								<span
-									class={cn("mr-1.5 inline-block size-2 rounded-full shadow-[0_0_8px_currentColor]", row.dot)}
+									class={cn(
+										"mr-1.5 inline-block size-2 rounded-full bg-current shadow-[0_0_8px_currentColor]",
+										row.dot,
+									)}
 								/>
 							)}
 							{row.name}
