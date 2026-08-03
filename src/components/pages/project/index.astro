@@ -216,26 +216,6 @@ const softwareApplicationLd = {
 			<span class="ml-2 text-foreground">glyndor meta {slug}</span>
 		</p>
 		<dl class="mt-2 space-y-0.5 text-muted-foreground">
-			<div class="flex gap-3">
-				<dt class="w-24 shrink-0 text-muted-foreground/80">{t.common.status}</dt>
-				<dd class="flex items-center gap-2">
-					<span
-						class={cn(
-							"size-2 rounded-full bg-current shadow-[0_0_8px_currentColor]",
-							dotClass(data.status),
-						)}
-					/>
-					{t.statuses[data.status]}
-				</dd>
-			</div>
-			{
-				version && (
-					<div class="flex gap-3">
-						<dt class="w-24 shrink-0 text-muted-foreground/80">version</dt>
-						<dd class="font-semibold text-accent">{version}</dd>
-					</div>
-				)
-			}
 			{
 				platformHost && (
 					<div class="flex gap-3">
