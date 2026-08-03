@@ -6,6 +6,9 @@ export type InstallOS = "linux" | "macos" | "windows" | "go";
 export interface InstallMethod {
 	label: string;
 	os: InstallOS;
+	// Human-readable target, since the package-manager name alone doesn't
+	// tell a reader which OS/distro it's for (e.g. "apt" -> Ubuntu/Debian).
+	platform: string;
 	command: string;
 }
 
@@ -14,17 +17,20 @@ export const installMethods: Record<string, InstallMethod[]> = {
 		{
 			label: "apt",
 			os: "linux",
+			platform: "Ubuntu / Debian",
 			command:
 				"curl -fsSLO https://apt.glyndor.net/glyndor-archive-keyring.deb && sudo dpkg -i glyndor-archive-keyring.deb && rm glyndor-archive-keyring.deb && sudo apt update && sudo apt install podup",
 		},
 		{
 			label: "brew",
 			os: "macos",
+			platform: "macOS",
 			command: "brew install glyndor/tap/podup",
 		},
 		{
 			label: "scoop",
 			os: "windows",
+			platform: "Windows",
 			command:
 				"scoop bucket add glyndor https://github.com/Glyndor/scoop-bucket\nscoop install podup",
 		},
@@ -33,6 +39,7 @@ export const installMethods: Record<string, InstallMethod[]> = {
 		{
 			label: "install script",
 			os: "linux",
+			platform: "Linux",
 			command:
 				"curl -fsSL https://raw.githubusercontent.com/Glyndor/helmly/main/install.sh | sudo bash",
 		},
@@ -41,6 +48,7 @@ export const installMethods: Record<string, InstallMethod[]> = {
 		{
 			label: "install script",
 			os: "linux",
+			platform: "Linux",
 			command: "curl -fsSL https://glyndor.net/install/epistle | sh",
 		},
 	],
@@ -48,6 +56,7 @@ export const installMethods: Record<string, InstallMethod[]> = {
 		{
 			label: "go get",
 			os: "go",
+			platform: "Any OS with Go",
 			command: "go get github.com/Glyndor/authcore",
 		},
 	],
@@ -55,6 +64,7 @@ export const installMethods: Record<string, InstallMethod[]> = {
 		{
 			label: "snap",
 			os: "linux",
+			platform: "Linux (snapd)",
 			command: "sudo snap install klyradb",
 		},
 	],
