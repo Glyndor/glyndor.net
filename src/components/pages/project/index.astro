@@ -1,4 +1,6 @@
 ---
+import InstallMethods from "@/components/install-methods/index.astro";
+import { installMethods } from "@/data/install";
 import type { Locale } from "@/lib/i18n";
 import { getDictionary, localizePath } from "@/lib/i18n";
 import type { StatusKey } from "@/lib/i18n/en";
@@ -46,6 +48,8 @@ const dotClass =
 		: data.status === "comingSoon"
 			? "text-accent"
 			: "text-signal-amber";
+
+const install = slug ? (installMethods[slug] ?? []) : [];
 
 const isBrowserExtension = slug === "specio" || slug === "viden";
 const softwareApplicationLd = {
@@ -108,6 +112,19 @@ const softwareApplicationLd = {
 	<p class="rise mt-8 max-w-4xl text-pretty leading-relaxed" style="animation-delay:180ms">
 		{data.summary}
 	</p>
+
+	<!-- install -->
+	{
+		install.length > 0 && (
+			<div class="rise mt-10" style="animation-delay:200ms">
+				<p>
+					<span class="text-accent">{prompt}</span>
+					<span class="ml-2 text-foreground">cat ./install</span>
+				</p>
+				<InstallMethods methods={install} />
+			</div>
+		)
+	}
 
 	<!-- features -->
 	<div class="rise mt-10" style="animation-delay:220ms">
