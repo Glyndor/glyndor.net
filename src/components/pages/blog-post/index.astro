@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/i18n";
 import { getDictionary, localizePath } from "@/lib/i18n";
 import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 
 interface Props {
 	locale: Locale;
@@ -22,7 +22,35 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
 	day: "numeric",
 	timeZone: "UTC",
 });
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const bannerImage = entry.data.banner
+	? await getImage({ src: entry.data.banner, width: 1200, format: "webp" })
+	: null;
+const blogPostingLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: entry.data.title,
+	description: entry.data.description,
+	datePublished: entry.data.date.toISOString(),
+	dateModified: entry.data.date.toISOString(),
+	inLanguage: locale,
+	url: canonical,
+	mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+	...(bannerImage ? { image: new URL(bannerImage.src, Astro.site).href } : {}),
+	...(entry.data.project
+		? { about: { "@type": "SoftwareApplication", name: entry.data.project } }
+		: {}),
+	author: { "@type": "Organization", name: t.site.name, url: "https://glyndor.net" },
+	publisher: {
+		"@type": "Organization",
+		name: t.site.name,
+		logo: { "@type": "ImageObject", url: new URL("/icon.png", Astro.site).href },
+	},
+};
 ---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(blogPostingLd)} />
 
 <article class="w-full px-4 py-16 text-sm leading-relaxed sm:px-8 lg:px-16 xl:px-24 sm:text-[15px]">
 	<a
