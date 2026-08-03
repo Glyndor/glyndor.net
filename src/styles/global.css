@@ -26,6 +26,7 @@
 
 	--signal-amber: oklch(0.82 0.16 75);
 	--signal-green: oklch(0.84 0.18 145);
+	--signal-red: oklch(0.7 0.19 25);
 	--ring: var(--accent);
 }
 
@@ -57,6 +58,7 @@
 	--color-accent-soft: var(--accent-soft);
 	--color-signal-amber: var(--signal-amber);
 	--color-signal-green: var(--signal-green);
+	--color-signal-red: var(--signal-red);
 	--color-border: var(--border);
 	--color-border-strong: var(--border-strong);
 	--color-input: var(--border-strong);
@@ -187,6 +189,21 @@
 	animation: pulse-dot 2.4s ease-in-out infinite;
 }
 
+/* CLI-style alert: heavier flicker for text that needs attention. */
+.flicker-alert {
+	animation: flicker-alert 2.6s linear infinite;
+}
+
+/* A short glitch nudge on hover — reads as a terminal catching new input. */
+.glitch-hover {
+	position: relative;
+	display: inline-block;
+}
+
+.glitch-hover:hover {
+	animation: glitch 0.28s steps(2, jump-none);
+}
+
 /* --- Motion --------------------------------------------------------------- */
 
 @keyframes type {
@@ -227,6 +244,53 @@
 	}
 	50% {
 		opacity: 0.55;
+	}
+}
+
+@keyframes glitch {
+	0% {
+		transform: translate(0);
+	}
+	25% {
+		transform: translate(-1px, 1px);
+	}
+	50% {
+		transform: translate(1px, -1px);
+	}
+	75% {
+		transform: translate(-1px, -1px);
+	}
+	100% {
+		transform: translate(0);
+	}
+}
+
+/* Sharper, less regular than the banner's flicker -- reads as "notice me". */
+@keyframes flicker-alert {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	4% {
+		opacity: 0.35;
+	}
+	8% {
+		opacity: 1;
+	}
+	9% {
+		opacity: 0.5;
+	}
+	11% {
+		opacity: 1;
+	}
+	70% {
+		opacity: 1;
+	}
+	72% {
+		opacity: 0.4;
+	}
+	74% {
+		opacity: 1;
 	}
 }
 

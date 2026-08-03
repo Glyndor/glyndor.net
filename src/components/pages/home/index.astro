@@ -16,7 +16,7 @@ const podupVersion = getVersion("Glyndor/podup");
 
 const dotClass = (status: string) =>
 	status === "released"
-		? "text-signal-green"
+		? "text-signal-green dot-pulse"
 		: status === "comingSoon"
 			? "text-accent"
 			: "text-signal-amber";
@@ -138,32 +138,32 @@ const banner = ` ██████╗ ██╗  ██╗   ██╗███
 		<!-- whoami -->
 		<p>
 			<span class="text-accent">{prompt}</span>
-			<span class="type ml-2 text-foreground" style="--w:6ch;--n:6;animation-delay:.3s">whoami</span
+			<span class="type ml-2 text-foreground" style="--w:6ch;--n:6;animation-delay:.15s">whoami</span
 			>
 		</p>
-		<p class="stream pb-4 text-foreground/90 glow-text" style="animation-delay:.9s">
+		<p class="stream pb-4 text-foreground/90 glow-text" style="animation-delay:.5s">
 			{t.home.console.identity}
 		</p>
 
 		<!-- cat mission -->
 		<p>
 			<span class="text-accent">{prompt}</span>
-			<span class="type ml-2 text-foreground" style="--w:17ch;--n:17;animation-delay:1.2s"
+			<span class="type ml-2 text-foreground" style="--w:17ch;--n:17;animation-delay:.65s"
 				>cat ./mission.txt</span
 			>
 		</p>
-		<p class="stream max-w-4xl pb-4 text-muted-foreground" style="animation-delay:1.85s">
+		<p class="stream max-w-4xl pb-4 text-muted-foreground" style="animation-delay:1s">
 			{t.home.hero.subtitle}
 		</p>
 
 		<!-- tree -->
 		<p>
 			<span class="text-accent">{prompt}</span>
-			<span class="type ml-2 text-foreground" style="--w:15ch;--n:15;animation-delay:2.15s"
+			<span class="type ml-2 text-foreground" style="--w:15ch;--n:15;animation-delay:1.15s"
 				>tree ./projects</span
 			>
 		</p>
-		<div class="stream pt-1" style="animation-delay:2.75s">
+		<div class="stream pt-1" style="animation-delay:1.5s">
 			<p class="text-muted-foreground">./projects</p>
 			{
 				tree.map((row) => (
@@ -207,18 +207,18 @@ const banner = ` ██████╗ ██╗  ██╗   ██╗███
 		</div>
 
 		<!-- final prompt + actions -->
-		<p class="stream pt-7" style="animation-delay:3.1s">
+		<p class="stream pt-7" style="animation-delay:1.7s">
 			<span class="text-accent">{prompt}</span>
 			<span class="ml-2 text-muted-foreground/80"># {t.home.console.hint}</span>
 			<span class="caret" aria-hidden="true"></span>
 		</p>
 
-		<div class="stream flex flex-col gap-1 pt-2 sm:flex-row sm:gap-8" style="animation-delay:3.3s">
+		<div class="stream flex flex-col gap-1 pt-2 sm:flex-row sm:gap-8" style="animation-delay:1.8s">
 			<a
 				href={localizePath("/projects", locale)}
-				class="group text-foreground transition-colors hover:text-accent"
+				class="group glitch-hover text-signal-green transition-colors hover:text-accent"
 			>
-				<span class="text-accent">$</span> ./explore --projects
+				<span class="text-signal-green">$</span> ./explore --projects
 				<span class="text-muted-foreground/50 transition-colors group-hover:text-accent"
 					>→</span
 				>
@@ -226,16 +226,16 @@ const banner = ` ██████╗ ██╗  ██╗   ██╗███
 			<a
 				href="https://github.com/Glyndor"
 				target="_blank" rel="noopener"
-				class="group text-muted-foreground transition-colors hover:text-foreground"
+				class="group glitch-hover text-muted-foreground transition-colors hover:text-foreground"
 			>
-				<span class="text-accent">$</span> git clone github.com/Glyndor
+				<span class="text-muted-foreground/70">$</span> git clone github.com/Glyndor
 			</a>
 			<a
 				href={localizePath("/support", locale)}
-				class="group text-muted-foreground transition-colors hover:text-accent"
+				class="group glitch-hover text-signal-amber transition-colors hover:text-accent"
 			>
-				<span class="text-accent">$</span> glyndor support
-				<span class="text-muted-foreground/50 transition-colors group-hover:text-accent">♥</span>
+				<span class="text-signal-amber">$</span> glyndor support
+				<span class="transition-colors group-hover:text-accent">♥</span>
 			</a>
 		</div>
 	</div>
@@ -249,7 +249,7 @@ const banner = ` ██████╗ ██╗  ██╗   ██╗███
 		<div class="mt-3 space-y-1">
 			<p class="text-muted-foreground/80"># {t.home.showcase.heading}</p>
 			<p class="max-w-2xl text-muted-foreground">{t.home.showcase.subheading}</p>
-			<p class="pt-2 text-muted-foreground/80">0 loaded units listed.</p>
+			<p class="flicker-alert pt-2 text-signal-red">0 loaded units listed.</p>
 		</div>
 	</div>
 </div>
