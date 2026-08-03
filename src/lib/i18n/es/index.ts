@@ -32,6 +32,7 @@ export const es: Dictionary = {
 		logScaleCaption: "Escala logarítmica — cada línea es 10× la anterior.",
 		scenario: "escenario",
 		viewAsTable: "Ver como tabla",
+		benchmarkMetric: "Métrica del benchmark",
 	},
 	home: {
 		hero: {

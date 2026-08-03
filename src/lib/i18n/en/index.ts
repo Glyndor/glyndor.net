@@ -33,6 +33,7 @@ export const en = {
 		logScaleCaption: "Log scale — each gridline is 10× the last.",
 		scenario: "scenario",
 		viewAsTable: "View as table",
+		benchmarkMetric: "Benchmark metric",
 	},
 	home: {
 		hero: {
