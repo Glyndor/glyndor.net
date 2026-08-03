@@ -34,6 +34,7 @@ export const en = {
 		scenario: "scenario",
 		viewAsTable: "View as table",
 		benchmarkMetric: "Benchmark metric",
+		docSection: "Documentation section",
 	},
 	home: {
 		hero: {
