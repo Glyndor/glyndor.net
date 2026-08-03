@@ -12,32 +12,72 @@ interface Props {
 
 const { methods } = Astro.props;
 const osIcon = { linux: Linux, macos: Apple, windows: Windows, go: null } as const;
+const single = methods.length === 1;
 ---
 
-<div class="mt-2 space-y-3">
+<div class="mt-2">
 	{
-		methods.map((method) => {
-			const Icon = osIcon[method.os];
-			return (
-				<div class="border border-border-strong">
-					<div class="flex items-center gap-2 border-b border-border-strong bg-card/50 px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground">
-						{Icon ? <Icon class="size-3.5" /> : <span class="font-semibold text-accent">Go</span>}
-						{method.label}
+		!single && (
+			<div role="tablist" aria-label="Install method" class="flex flex-wrap gap-1">
+				{methods.map((method, i) => {
+					const Icon = osIcon[method.os];
+					return (
 						<button
 							type="button"
-							data-copy={method.command}
-							class="group ml-auto flex items-center gap-1 p-1.5 text-muted-foreground transition-colors hover:text-accent"
-							aria-label={`Copy: ${method.command}`}
+							role="tab"
+							id={`install-tab-${i}`}
+							aria-selected={i === 0}
+							aria-controls={`install-panel-${i}`}
+							tabindex={i === 0 ? 0 : -1}
+							data-install-tab={i}
+							class="install-tab flex items-center gap-1.5 border border-b-0 border-border-strong px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground transition-colors aria-selected:border-border-strong aria-selected:bg-card/50 aria-selected:text-foreground"
 						>
-							<Copy class="icon-copy size-3.5" />
-							<Check class="icon-check hidden size-3.5 text-signal-green" />
+							{Icon ? <Icon class="size-3.5" /> : <span class="font-semibold text-accent">Go</span>}
+							{method.label}
 						</button>
-					</div>
-					<pre class="overflow-x-auto px-3 py-2 text-xs text-foreground/90"><code>{method.command}</code></pre>
-				</div>
-			);
-		})
+					);
+				})}
+			</div>
+		)
 	}
+	<div class="border border-border-strong">
+		{
+			methods.map((method, i) => {
+				const Icon = osIcon[method.os];
+				return (
+					<div
+						role={single ? undefined : "tabpanel"}
+						id={single ? undefined : `install-panel-${i}`}
+						aria-labelledby={single ? undefined : `install-tab-${i}`}
+						hidden={!single && i !== 0}
+					>
+						{single && (
+							<div class="flex items-center gap-2 border-b border-border-strong bg-card/50 px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground">
+								{Icon ? (
+									<Icon class="size-3.5" />
+								) : (
+									<span class="font-semibold text-accent">Go</span>
+								)}
+								{method.label}
+							</div>
+						)}
+						<div class="flex items-center gap-2 px-3 py-2">
+							<pre class="min-w-0 flex-1 overflow-x-auto text-xs text-foreground/90"><code>{method.command}</code></pre>
+							<button
+								type="button"
+								data-copy={method.command}
+								class="group flex shrink-0 items-center gap-1 p-1.5 text-muted-foreground transition-colors hover:text-accent"
+								aria-label={`Copy: ${method.command}`}
+							>
+								<Copy class="icon-copy size-3.5" />
+								<Check class="icon-check hidden size-3.5 text-signal-green" />
+							</button>
+						</div>
+					</div>
+				);
+			})
+		}
+	</div>
 </div>
 
 <script>
@@ -58,6 +98,30 @@ const osIcon = { linux: Linux, macos: Apple, windows: Windows, go: null } as con
 					copyIcon?.classList.remove("hidden");
 					checkIcon?.classList.add("hidden");
 				}, 1500);
+			});
+		});
+
+		const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-install-tab]"));
+		if (tabs.length === 0) return;
+
+		function select(index: number) {
+			tabs.forEach((tab, i) => {
+				const active = i === index;
+				tab.setAttribute("aria-selected", String(active));
+				tab.tabIndex = active ? 0 : -1;
+				const panel = document.getElementById(tab.getAttribute("aria-controls") ?? "");
+				if (panel) panel.hidden = !active;
+			});
+		}
+
+		tabs.forEach((tab, i) => {
+			tab.addEventListener("click", () => select(i));
+			tab.addEventListener("keydown", (e) => {
+				if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+				e.preventDefault();
+				const next = e.key === "ArrowRight" ? (i + 1) % tabs.length : (i - 1 + tabs.length) % tabs.length;
+				select(next);
+				tabs[next].focus();
 			});
 		});
 	});
