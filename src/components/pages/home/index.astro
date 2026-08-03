@@ -106,7 +106,13 @@ const banner = ` ██████╗ ██╗  ██╗   ██╗███
 			>
 		</p>
 		<p class="stream pb-4 text-foreground/90 glow-text" style="animation-delay:.5s">
-			{t.home.console.identity}
+			<span class="sr-only">{t.home.console.identities[0]}</span>
+			<span
+				id="whoami-output"
+				aria-hidden="true"
+				data-phrases={JSON.stringify(t.home.console.identities)}
+				>{t.home.console.identities[0]}</span
+			><span class="cursor-blink" aria-hidden="true"></span>
 		</p>
 
 		<!-- cat mission -->
@@ -220,3 +226,46 @@ const banner = ` ██████╗ ██╗  ██╗   ██╗███
 		</div>
 	</div>
 </div>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const el = document.getElementById("whoami-output");
+		if (!el) return;
+
+		const phrases = JSON.parse(el.dataset.phrases ?? "[]") as string[];
+		const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		if (phrases.length < 2 || reduceMotion) return;
+
+		const TYPE_MS = 45;
+		const DELETE_MS = 25;
+		const HOLD_MS = 2400;
+		let phraseIndex = 0;
+		let charIndex = phrases[0].length;
+		let deleting = false;
+
+		function tick() {
+			const current = phrases[phraseIndex];
+			if (!deleting) {
+				charIndex++;
+				if (charIndex > current.length) {
+					deleting = true;
+					setTimeout(tick, HOLD_MS);
+					return;
+				}
+			} else {
+				charIndex--;
+				if (charIndex < 0) {
+					deleting = false;
+					phraseIndex = (phraseIndex + 1) % phrases.length;
+					charIndex = 0;
+					setTimeout(tick, 300);
+					return;
+				}
+			}
+			if (el) el.textContent = current.slice(0, charIndex);
+			setTimeout(tick, deleting ? DELETE_MS : TYPE_MS);
+		}
+
+		setTimeout(tick, HOLD_MS);
+	});
+</script>
