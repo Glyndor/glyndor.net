@@ -73,7 +73,7 @@ const softwareApplicationLd = {
 		class="rise group inline-block text-muted-foreground transition-colors hover:text-foreground"
 	>
 		<span class="text-accent">$</span> cd ..
-		<span class="text-muted-foreground/50"># {t.common.backToProjects}</span>
+		<span class="text-muted-foreground/80"># {t.common.backToProjects}</span>
 	</a>
 
 	<!-- info header -->
@@ -84,7 +84,7 @@ const softwareApplicationLd = {
 
 	<div class="rise mt-3" style="animation-delay:120ms">
 		<p class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-			<span class={dotClass}>●</span>
+			<span class={`size-2 rounded-full shadow-[0_0_8px_currentColor] ${dotClass}`} />
 			{t.statuses[data.status]}
 			{version && <span class="text-accent">· {version}</span>}
 		</p>
@@ -92,10 +92,10 @@ const softwareApplicationLd = {
 			<span class="text-muted-foreground/40">~/</span>{data.name}
 		</h1>
 		<p class="mt-2 text-lg text-muted-foreground">{data.tagline}</p>
-		{scope && <p class="mt-1 text-sm text-muted-foreground/70"># {scope}</p>}
+		{scope && <p class="mt-1 text-sm text-muted-foreground/80"># {scope}</p>}
 		{
 			componentOf && (
-				<p class="mt-1 text-sm text-muted-foreground/70">
+				<p class="mt-1 text-sm text-muted-foreground/80">
 					# {t.common.componentOf}{" "}
 					<a
 						href={localizePath(`/projects/${componentOf.slug}`, locale)}
@@ -184,16 +184,16 @@ const softwareApplicationLd = {
 		</p>
 		<dl class="mt-2 space-y-0.5 text-muted-foreground">
 			<div class="flex gap-3">
-				<dt class="w-24 shrink-0 text-muted-foreground/60">{t.common.status}</dt>
+				<dt class="w-24 shrink-0 text-muted-foreground/80">{t.common.status}</dt>
 				<dd class="flex items-center gap-2">
-					<span class={dotClass}>●</span>
+					<span class={`size-2 rounded-full shadow-[0_0_8px_currentColor] ${dotClass}`} />
 					{t.statuses[data.status]}
 				</dd>
 			</div>
 			{
 				version && (
 					<div class="flex gap-3">
-						<dt class="w-24 shrink-0 text-muted-foreground/60">version</dt>
+						<dt class="w-24 shrink-0 text-muted-foreground/80">version</dt>
 						<dd class="text-accent">{version}</dd>
 					</div>
 				)
@@ -201,13 +201,13 @@ const softwareApplicationLd = {
 			{
 				platformHost && (
 					<div class="flex gap-3">
-						<dt class="w-24 shrink-0 text-muted-foreground/60">{t.common.platform}</dt>
+						<dt class="w-24 shrink-0 text-muted-foreground/80">{t.common.platform}</dt>
 						<dd class="text-accent">{platformHost}</dd>
 					</div>
 				)
 			}
 			<div class="flex gap-3">
-				<dt class="w-24 shrink-0 text-muted-foreground/60">repo</dt>
+				<dt class="w-24 shrink-0 text-muted-foreground/80">repo</dt>
 				<dd class="text-foreground">{repoPath}</dd>
 			</div>
 		</dl>

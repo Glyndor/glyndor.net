@@ -55,14 +55,14 @@ function isActive(path: string): boolean {
 							href={localizePath(link.path, locale)}
 							aria-current={active ? "page" : undefined}
 							class={cn(
-								"flex items-center px-3 transition-colors sm:px-4",
+								"flex items-center px-2 transition-colors sm:px-4",
 								active
 									? "bg-accent-soft text-accent"
 									: "text-muted-foreground hover:text-foreground",
 							)}
 						>
-							<span class="text-muted-foreground/50">{index}:</span>
-							<span class="ml-1 lowercase">{link.label}</span>
+							<span class="text-muted-foreground/80">{index}:</span>
+							<span class="sr-only sm:not-sr-only sm:ml-1 sm:lowercase">{link.label}</span>
 							{active && <span class="ml-1 text-accent">*</span>}
 						</a>
 					);

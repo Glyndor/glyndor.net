@@ -46,14 +46,14 @@ const prompt = "guest@glyndor:~$";
 			# {t.projectsIndex.subtitle}
 		</p>
 		<p
-			class="rise mt-1 pl-4 text-xs text-muted-foreground/70"
+			class="rise mt-1 pl-4 text-xs text-muted-foreground/80"
 			style="animation-delay:120ms"
 		>
 			total {projects.length}
 		</p>
 
 		<div
-			class="rise mt-5 divide-y divide-border border-y border-border text-sm"
+			class="rise mt-5 divide-y divide-border-strong border-y border-border-strong text-sm"
 			style="animation-delay:160ms"
 		>
 			{
@@ -73,7 +73,7 @@ const prompt = "guest@glyndor:~$";
 							{project.tagline}
 							{"components" in project &&
 								project.components.map((c) => (
-									<span class="ml-2 whitespace-nowrap text-xs text-muted-foreground/70">
+									<span class="ml-2 whitespace-nowrap text-xs text-muted-foreground/80">
 										+{c.name}
 									</span>
 								))}
@@ -91,12 +91,12 @@ const prompt = "guest@glyndor:~$";
 			<span class="text-accent">{prompt}</span>
 			<span class="ml-2 text-foreground">ls -l ~/showcase</span>
 		</p>
-		<p class="rise mt-2 pl-4 text-xs text-muted-foreground/70" style="animation-delay:260ms">
+		<p class="rise mt-2 pl-4 text-xs text-muted-foreground/80" style="animation-delay:260ms">
 			# {t.home.showcase.heading.toLowerCase()}
 		</p>
 
 		<div
-			class="rise mt-4 border-y border-border px-2 py-6 text-sm text-muted-foreground/70"
+			class="rise mt-4 border-y border-border-strong px-2 py-6 text-sm text-muted-foreground/80"
 			style="animation-delay:300ms"
 		>
 			total 0 — {t.home.showcase.subheading}
