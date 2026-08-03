@@ -63,41 +63,68 @@ const prompt = "guest@glyndor:~$";
 		>
 			{
 				projects.map((project) => (
-					<a
-						href={localizePath(`/projects/${project.key}`, locale)}
-						class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 px-2 py-6 transition-colors hover:bg-accent-soft sm:grid-cols-[1.5rem_9rem_1fr_auto]"
-					>
-						<span class="text-muted-foreground/60">{project.index}</span>
-						<span class="flex items-center gap-2 font-semibold text-foreground group-hover:text-accent">
-							<span
-								class={cn("size-2 rounded-full shadow-[0_0_8px_currentColor]", dotClass(project.status))}
-							/>
-							{project.key}/
-						</span>
-						<span class="col-span-2 text-muted-foreground sm:col-span-1">
-							{project.tagline}
-							{"components" in project &&
-								project.components.map((c) => (
-									<span class="ml-2 inline-flex items-center gap-1 whitespace-nowrap text-xs text-muted-foreground/80">
-										{c.status && (
-											<span
-												class={cn("size-1.5 rounded-full shadow-[0_0_6px_currentColor]", dotClass(c.status))}
-											/>
-										)}
-										+{c.name}
-									</span>
-								))}
-						</span>
-						<span class="hidden self-center whitespace-nowrap text-xs uppercase tracking-wider text-muted-foreground transition-colors group-hover:text-accent sm:inline">
-							{t.statuses[project.status]}
-							{project.version && (
-								<>
-									{" · "}
-									<span class="font-semibold text-accent">{project.version}</span>
-								</>
-							)}
-						</span>
-					</a>
+					<>
+						<a
+							href={localizePath(`/projects/${project.key}`, locale)}
+							class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 px-2 py-6 transition-colors hover:bg-accent-soft sm:grid-cols-[1.5rem_9rem_1fr_auto]"
+						>
+							<span class="text-muted-foreground/60">{project.index}</span>
+							<span class="flex items-center gap-2 font-semibold text-foreground group-hover:text-accent">
+								<span
+									class={cn(
+										"size-2 rounded-full shadow-[0_0_8px_currentColor]",
+										dotClass(project.status),
+									)}
+								/>
+								{project.key}/
+							</span>
+							<span class="col-span-2 text-muted-foreground sm:col-span-1">{project.tagline}</span>
+							<span class="hidden self-center whitespace-nowrap text-xs uppercase tracking-wider text-muted-foreground transition-colors group-hover:text-accent sm:inline">
+								{t.statuses[project.status]}
+								{project.version && (
+									<>
+										{" · "}
+										<span class="font-semibold text-accent">{project.version}</span>
+									</>
+								)}
+							</span>
+						</a>
+						{"components" in project &&
+							project.components.map((c) => {
+								const cVersion = c.status ? versionFor(c.repo) : null;
+								return (
+									<a
+										href={localizePath(`/projects/${c.name}`, locale)}
+										class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 py-3 pr-2 pl-8 transition-colors hover:bg-accent-soft sm:grid-cols-[1.5rem_9rem_1fr_auto]"
+									>
+										<span class="whitespace-pre text-muted-foreground/40">└──</span>
+										<span class="flex items-center gap-2 text-muted-foreground group-hover:text-accent">
+											{c.status && (
+												<span
+													class={cn(
+														"size-1.5 rounded-full shadow-[0_0_6px_currentColor]",
+														dotClass(c.status),
+													)}
+												/>
+											)}
+											{c.name}
+										</span>
+										<span class="col-span-2 text-muted-foreground/80 sm:col-span-1">
+											{c.description}
+										</span>
+										<span class="hidden self-center whitespace-nowrap text-xs uppercase tracking-wider text-muted-foreground transition-colors group-hover:text-accent sm:inline">
+											{c.status && t.statuses[c.status]}
+											{cVersion && (
+												<>
+													{" · "}
+													<span class="font-semibold text-accent">{cVersion}</span>
+												</>
+											)}
+										</span>
+									</a>
+								);
+							})}
+					</>
 				))
 			}
 		</div>
