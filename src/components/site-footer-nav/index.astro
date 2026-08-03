@@ -69,6 +69,15 @@ const projectRows = [
 					<li class="flex gap-2">
 						<span class="whitespace-pre text-muted-foreground/40">├──</span>
 						<a
+							href={localizePath("/blog", locale)}
+							class="text-muted-foreground transition-colors hover:text-accent"
+						>
+							{t.nav.blog.toLowerCase()}
+						</a>
+					</li>
+					<li class="flex gap-2">
+						<span class="whitespace-pre text-muted-foreground/40">├──</span>
+						<a
 							href={localizePath("/support", locale)}
 							class="text-muted-foreground transition-colors hover:text-accent"
 						>

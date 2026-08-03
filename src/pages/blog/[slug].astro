@@ -1,0 +1,33 @@
+---
+import BlogPost from "@/components/pages/blog-post/index.astro";
+import Base from "@/layouts/base/index.astro";
+import { getDictionary } from "@/lib/i18n";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+	const entries = await getCollection("blog", (entry) => entry.data.locale === "en");
+	return entries.map((entry) => ({
+		params: { slug: entry.data.urlSlug },
+		props: { entry },
+	}));
+}
+
+interface Props {
+	entry: CollectionEntry<"blog">;
+}
+
+const locale = "en" as const;
+const t = getDictionary(locale);
+const { slug } = Astro.params;
+const { entry } = Astro.props;
+---
+
+<Base
+	locale={locale}
+	title={`${entry.data.title} — ${t.site.name}`}
+	description={entry.data.description}
+	ogImage={entry.data.banner}
+>
+	<BlogPost locale={locale} slug={slug} entry={entry} />
+</Base>

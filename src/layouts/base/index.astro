@@ -12,9 +12,12 @@ interface Props {
 	locale: Locale;
 	title: string;
 	description: string;
+	// Explicit og:image override (a blog post's own banner). Falls back to
+	// the product/org banner lookup below when omitted.
+	ogImage?: ImageMetadata;
 }
 
-const { locale, title, description } = Astro.props;
+const { locale, title, description, ogImage: ogImageOverride } = Astro.props;
 const t = getDictionary(locale);
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
@@ -34,6 +37,7 @@ const ogSources = import.meta.glob<{ default: ImageMetadata }>("/src/assets/og/*
 });
 const productSlug = basePath.startsWith("/projects/") ? basePath.split("/")[2] : null;
 const ogSource =
+	ogImageOverride ??
 	(productSlug && ogSources[`/src/assets/og/${productSlug}.png`]?.default) ??
 	ogSources["/src/assets/og/glyndor-net.png"].default;
 const og = await getImage({ src: ogSource, width: 1200, format: "webp" });

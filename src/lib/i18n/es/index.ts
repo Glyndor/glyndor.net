@@ -11,6 +11,7 @@ export const es: Dictionary = {
 	nav: {
 		home: "Inicio",
 		projects: "Proyectos",
+		blog: "Blog",
 		support: "Apoyar",
 		github: "GitHub",
 	},
@@ -75,6 +76,16 @@ export const es: Dictionary = {
 	projectsIndex: {
 		title: "Proyectos",
 		subtitle: "Piezas de código abierto para armar tu infraestructura autoalojada.",
+	},
+	blog: {
+		title: "Blog",
+		subtitle: "Lanzamientos y noticias de todo Glyndor.",
+		empty: "Todavía no hay publicaciones.",
+		allTopics: "todos",
+		backToBlog: "Volver al blog",
+		published: "Publicado",
+		relatedProject: "Sobre",
+		readMore: "Leer publicación",
 	},
 	statuses: {
 		inDevelopment: "En desarrollo",

@@ -1,0 +1,81 @@
+---
+import type { Locale } from "@/lib/i18n";
+import { getDictionary, localizePath } from "@/lib/i18n";
+import { getCollection } from "astro:content";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const prompt = "guest@glyndor:~$";
+
+const entries = await getCollection("blog", (entry) => entry.data.locale === locale);
+const posts = entries
+	.map((entry) => ({ slug: entry.data.urlSlug, data: entry.data }))
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// timeZone: "UTC" -- the date is a calendar day (a release date), not a
+// timestamped moment; formatting in the server/viewer's local zone can
+// shift a UTC-midnight date to the previous day.
+const dateFormatter = new Intl.DateTimeFormat(locale, {
+	year: "numeric",
+	month: "short",
+	day: "numeric",
+	timeZone: "UTC",
+});
+---
+
+<section class="w-full px-4 py-16 sm:px-8 lg:px-16 xl:px-24">
+	<div class="w-full">
+		<p class="rise text-sm">
+			<span class="text-accent">{prompt}</span>
+			<span class="ml-2 text-foreground">ls -l ~/blog</span>
+		</p>
+		<p class="rise mt-2 pl-4 text-sm text-muted-foreground" style="animation-delay:80ms">
+			# {t.blog.subtitle}
+		</p>
+		<p class="rise mt-1 pl-4 text-xs text-muted-foreground/80" style="animation-delay:120ms">
+			total {posts.length}
+		</p>
+
+		{
+			posts.length === 0 ? (
+				<p class="rise mt-6 text-sm text-muted-foreground" style="animation-delay:160ms">
+					# {t.blog.empty}
+				</p>
+			) : (
+				<div
+					class="rise mt-5 divide-y divide-border-strong border-y border-border-strong text-sm"
+					style="animation-delay:160ms"
+				>
+					{posts.map((post) => (
+						<a
+							href={localizePath(`/blog/${post.slug}`, locale)}
+							class="group grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 px-2 py-6 transition-colors hover:bg-accent-soft sm:grid-cols-[7rem_1fr_auto]"
+						>
+							<span class="whitespace-nowrap text-xs uppercase tracking-wider text-muted-foreground/70">
+								{dateFormatter.format(post.data.date)}
+							</span>
+							<span class="col-span-2 sm:col-span-1">
+								<span class="font-semibold text-foreground group-hover:text-accent">
+									{post.data.title}
+								</span>
+								{post.data.project && (
+									<span class="ml-2 whitespace-nowrap text-xs text-muted-foreground/60">
+										#{post.data.project}
+									</span>
+								)}
+								<span class="mt-0.5 block text-muted-foreground">{post.data.description}</span>
+							</span>
+							<span class="hidden self-center whitespace-nowrap text-xs uppercase tracking-wider text-muted-foreground transition-colors group-hover:text-accent sm:inline">
+								[{t.blog.readMore}]
+							</span>
+						</a>
+					))}
+				</div>
+			)
+		}
+	</div>
+</section>
