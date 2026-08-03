@@ -5,14 +5,16 @@ import { defaultLocale, locales, localizePath, stripLocale } from "./src/lib/i18
 
 const site = "https://glyndor.net";
 
-// Match the trailing slash every built page actually has (dist/<path>/index.html).
-function withTrailingSlash(path: string): string {
-	return path === "/" ? path : `${path}/`;
-}
-
 // https://astro.build/config
 export default defineConfig({
 	site,
+	trailingSlash: "never",
+	build: {
+		// <path>.html instead of <path>/index.html, matching trailingSlash:
+		// "never" -- localizePath() already builds clean, no-trailing-slash
+		// paths, so the build output now matches what the app itself links to.
+		format: "file",
+	},
 	server: {
 		port: 15694,
 	},
@@ -34,14 +36,11 @@ export default defineConfig({
 				const canonicalPath = stripLocale(url.pathname);
 				const links: { lang: string; url: string }[] = locales.map((locale) => ({
 					lang: locale,
-					url: new URL(withTrailingSlash(localizePath(canonicalPath, locale)), site).href,
+					url: new URL(localizePath(canonicalPath, locale), site).href,
 				}));
 				links.push({
 					lang: "x-default",
-					url: new URL(
-						withTrailingSlash(localizePath(canonicalPath, defaultLocale)),
-						site,
-					).href,
+					url: new URL(localizePath(canonicalPath, defaultLocale), site).href,
 				});
 				return { ...item, links };
 			},

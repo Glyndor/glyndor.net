@@ -1,0 +1,25 @@
+---
+import BlogIndex from "@/components/pages/blog-index/index.astro";
+import Base from "@/layouts/base/index.astro";
+import { getDictionary } from "@/lib/i18n";
+import { getBlogProjects, getPostsByLocale } from "@/lib/blog";
+import type { PaginateFunction } from "astro";
+
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
+	// Inline the locale literal rather than closing over an outer const --
+	// Astro extracts getStaticPaths into its own build chunk, and the
+	// outer-scope closure did not carry over (build-time "locale is not
+	// defined" even though this reads fine as plain JS).
+	const posts = await getPostsByLocale("en");
+	return paginate(posts, { pageSize: 10 });
+}
+
+const locale = "en" as const;
+const t = getDictionary(locale);
+const { page } = Astro.props;
+const projects = await getBlogProjects(locale);
+---
+
+<Base locale={locale} title={`${t.blog.title} — ${t.site.name}`} description={t.blog.subtitle}>
+	<BlogIndex locale={locale} page={page} projects={projects} activeProject={null} />
+</Base>
