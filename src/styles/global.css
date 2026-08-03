@@ -102,15 +102,11 @@
 	);
 }
 
-/* ASCII banner — phosphor, glowing, never wraps.
-   max-width + overflow-x guard against any font/viewport combination
-   rendering the fixed-width glyphs wider than their container. */
+/* ASCII banner — phosphor, glowing, never wraps. */
 .ascii {
 	font-size: clamp(0.36rem, 1.65vw, 0.8rem);
 	line-height: 1.04;
 	white-space: pre;
-	max-width: 100%;
-	overflow-x: hidden;
 	color: var(--accent);
 	text-shadow: 0 0 12px oklch(0.83 0.13 207 / 0.5);
 	animation: flicker 6s linear infinite;
