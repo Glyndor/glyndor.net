@@ -27,6 +27,11 @@ export const es: Dictionary = {
 		components: "Componentes",
 		componentOf: "Componente de",
 		fullBenchmarks: "Ver todos los benchmarks y la metodología",
+		memoryUsage: "Uso de memoria",
+		wallClockTime: "Tiempo real de ejecución",
+		logScaleCaption: "Escala logarítmica — cada línea es 10× la anterior.",
+		scenario: "escenario",
+		viewAsTable: "Ver como tabla",
 	},
 	home: {
 		hero: {

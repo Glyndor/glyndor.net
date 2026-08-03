@@ -1,0 +1,126 @@
+---
+import type { BenchmarkChart } from "@/data/benchmarks";
+
+interface Props extends BenchmarkChart {
+	title: string;
+	caption?: string;
+	tableLabel: string;
+	scenarioLabel: string;
+	baseDelay?: number;
+}
+
+const {
+	title,
+	caption,
+	tableLabel,
+	scenarioLabel,
+	unit,
+	scale,
+	categories,
+	series,
+	baseDelay = 0,
+} = Astro.props;
+
+// Fixed categorical order, validated against this site's card surface
+// (#161c1c) with `dataviz` skill's validate_palette.js: all checks pass,
+// worst adjacent CVD ΔE 9.4, worst normal-vision ΔE 26.5.
+const COLORS = ["#3987e5", "#d95926", "#199e70"] as const;
+
+const allValues = series.flatMap((s) => s.values);
+const maxValue = Math.max(...allValues);
+const minValue = Math.min(...allValues);
+
+const domainMin = scale === "log" ? 10 ** Math.floor(Math.log10(minValue)) : 0;
+const domainMax =
+	scale === "log"
+		? 10 ** Math.ceil(Math.log10(maxValue))
+		: Math.ceil(maxValue / 4 / 10 ** Math.floor(Math.log10(maxValue / 4))) *
+			10 ** Math.floor(Math.log10(maxValue / 4)) *
+			4;
+
+function pct(v: number) {
+	if (scale === "log") {
+		return ((Math.log10(v) - Math.log10(domainMin)) / (Math.log10(domainMax) - Math.log10(domainMin))) * 100;
+	}
+	return ((v - domainMin) / (domainMax - domainMin)) * 100;
+}
+
+function formatValue(v: number) {
+	if (unit === "ms" && v >= 1000) {
+		return `${(v / 1000).toFixed(v >= 10000 ? 0 : 1)} s`;
+	}
+	return `${Number.isInteger(v) ? v : v.toFixed(1)} ${unit}`;
+}
+---
+
+<div class="mt-6">
+	<div class="flex items-baseline justify-between gap-4">
+		<p class="text-xs uppercase tracking-wider text-muted-foreground">{title}</p>
+		<div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
+			{
+				series.map((s, si) => (
+					<span class="flex items-center gap-1.5">
+						<span class="size-2.5" style={`background-color:${COLORS[si]}`} />
+						{s.name}
+					</span>
+				))
+			}
+		</div>
+	</div>
+	{caption && <p class="mt-1 text-xs text-muted-foreground/70">{caption}</p>}
+
+	<div class="mt-3 space-y-3">
+		{
+			categories.map((category, i) => (
+				<div class="rise" style={`animation-delay:${baseDelay + i * 70}ms`}>
+					<p class="mb-1 text-xs text-muted-foreground/80">{category}</p>
+					<div class="space-y-[2px]">
+						{series.map((s, si) => (
+							<div class="grid grid-cols-[1fr_auto] items-center gap-2">
+								<div class="h-[10px] bg-border-strong/50" aria-hidden="true">
+									<div
+										class="barfill h-full"
+										style={`--w:${pct(s.values[i])}%; background-color:${COLORS[si]}; animation-delay:${baseDelay + i * 70 + 80}ms`}
+										role="img"
+										aria-label={`${s.name}, ${category}: ${formatValue(s.values[i])}`}
+									/>
+								</div>
+								<span class="w-16 shrink-0 text-right font-mono text-xs text-muted-foreground tabular-nums">
+									{formatValue(s.values[i])}
+								</span>
+							</div>
+						))}
+					</div>
+				</div>
+			))
+		}
+	</div>
+
+	<details class="mt-3 text-xs">
+		<summary class="cursor-pointer text-muted-foreground transition-colors hover:text-accent">
+			{tableLabel}
+		</summary>
+		<div class="mt-2 overflow-x-auto">
+			<table class="w-full border-collapse text-left">
+				<thead>
+					<tr class="border-b border-border-strong text-muted-foreground">
+						<th class="py-1 pr-4 font-normal">{scenarioLabel}</th>
+						{series.map((s) => (
+							<th class="py-1 pr-4 font-normal">{s.name}</th>
+						))}
+					</tr>
+				</thead>
+				<tbody>
+					{categories.map((category, i) => (
+						<tr class="border-b border-border/50">
+							<td class="py-1 pr-4 text-muted-foreground">{category}</td>
+							{series.map((s) => (
+								<td class="py-1 pr-4 text-foreground/90 tabular-nums">{formatValue(s.values[i])}</td>
+							))}
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	</details>
+</div>

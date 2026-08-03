@@ -189,6 +189,19 @@
 	animation: pulse-dot 2.4s ease-in-out infinite;
 }
 
+/* Benchmark bar fill: grows from 0 to its target width (set via --w),
+   same "animate toward a CSS-variable end state" trick as .type. */
+.barfill {
+	width: var(--w, 100%);
+	animation: barfill 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes barfill {
+	from {
+		width: 0;
+	}
+}
+
 /* CLI-style alert: heavier flicker for text that needs attention. */
 .flicker-alert {
 	animation: flicker-alert 2.6s linear infinite;
@@ -331,6 +344,9 @@
 	}
 	.type {
 		width: var(--w, auto);
+	}
+	.barfill {
+		width: var(--w, 100%);
 	}
 	html {
 		scroll-behavior: auto;
