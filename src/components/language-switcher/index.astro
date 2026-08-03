@@ -14,7 +14,7 @@ const basePath = stripLocale(Astro.url.pathname);
 
 <details class="group relative font-mono text-xs">
 	<summary
-		class="flex cursor-pointer list-none items-center gap-2 rounded-md border border-border-strong bg-card/60 px-2.5 py-1.5 backdrop-blur transition-colors hover:border-accent/40 [&::-webkit-details-marker]:hidden"
+		class="flex cursor-pointer list-none items-center gap-1 rounded-md border border-border-strong bg-card/60 px-2 py-1.5 backdrop-blur transition-colors hover:border-accent/40 sm:gap-2 sm:px-2.5 [&::-webkit-details-marker]:hidden"
 	>
 		<img
 			src={`/flags/${locale}.svg`}
@@ -23,7 +23,9 @@ const basePath = stripLocale(Astro.url.pathname);
 			height="18"
 			class="size-[18px] shrink-0 rounded-full ring-1 ring-border-strong"
 		/>
-		<span class="uppercase tracking-[0.15em] text-foreground">{locale}</span>
+		<span class="sr-only sm:not-sr-only sm:uppercase sm:tracking-[0.15em] sm:text-foreground">
+			{locale}
+		</span>
 		<ChevronDown
 			class="size-3 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
 		/>
