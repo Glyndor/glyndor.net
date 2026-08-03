@@ -88,6 +88,7 @@ export const en = {
 					description:
 						"Hardened Rust daemon installed on each managed server — runs Ed25519-signed commands and reports telemetry over WireGuard + mTLS. A component of helmly, not standalone.",
 					repo: "https://github.com/Glyndor/helmly-agent",
+					status: "released" as StatusKey,
 				},
 			],
 		},
@@ -124,6 +125,7 @@ export const en = {
 					description:
 						"Next.js admin UI on top of the epistle API: domains, mailboxes, email security and queues. Pairs with epistle; the server stays headless.",
 					repo: "https://github.com/Glyndor/epistle-panel",
+					status: "inDevelopment" as StatusKey,
 				},
 			],
 		},

@@ -89,6 +89,7 @@ export const es: Dictionary = {
 					description:
 						"Daemon en Rust endurecido instalado en cada servidor gestionado — ejecuta comandos firmados con Ed25519 y reporta telemetría por WireGuard + mTLS. Es componente de helmly, no funciona solo.",
 					repo: "https://github.com/Glyndor/helmly-agent",
+					status: "released",
 				},
 			],
 		},
@@ -125,6 +126,7 @@ export const es: Dictionary = {
 					description:
 						"UI de administración en Next.js sobre la API de epistle: dominios, buzones, seguridad de correo y colas. Acompaña a epistle; el servidor sigue headless.",
 					repo: "https://github.com/Glyndor/epistle-panel",
+					status: "inDevelopment",
 				},
 			],
 		},
