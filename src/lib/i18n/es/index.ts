@@ -33,6 +33,7 @@ export const es: Dictionary = {
 		scenario: "escenario",
 		viewAsTable: "Ver como tabla",
 		benchmarkMetric: "Métrica del benchmark",
+		docSection: "Sección de documentación",
 	},
 	home: {
 		hero: {

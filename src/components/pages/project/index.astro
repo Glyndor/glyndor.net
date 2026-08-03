@@ -146,15 +146,130 @@ const softwareApplicationLd = {
 		)
 	}
 
-	<!-- features -->
+	<!-- features / benchmarks -->
 	<div class="rise mt-10" style="animation-delay:220ms">
 		<p>
 			<span class="text-accent">{prompt}</span>
-			<span class="ml-2 text-foreground">cat ./features</span>
+			<span class="ml-2 text-foreground">cat ./{data.benchmarks ? "docs" : "features"}</span>
 		</p>
-		<ul class="mt-2 grid gap-1 sm:grid-cols-2">
-			{
-				data.features.map((feature, i) => (
+		{data.benchmarks ? (
+			<>
+				<div role="tablist" aria-label={t.common.docSection} class="mt-2 flex flex-wrap gap-1">
+					<button
+						type="button"
+						role="tab"
+						id="section-tab-0"
+						aria-selected="true"
+						aria-controls="section-panel-0"
+						tabindex={0}
+						data-section-tab="0"
+						class="section-tab border border-b-0 border-border-strong px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground transition-colors aria-selected:bg-card/50 aria-selected:text-foreground"
+					>
+						./features
+					</button>
+					<button
+						type="button"
+						role="tab"
+						id="section-tab-1"
+						aria-selected="false"
+						aria-controls="section-panel-1"
+						tabindex={-1}
+						data-section-tab="1"
+						class="section-tab border border-b-0 border-border-strong px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground transition-colors aria-selected:bg-card/50 aria-selected:text-foreground"
+					>
+						./benchmarks
+					</button>
+				</div>
+				<div class="border border-border-strong px-3 py-3">
+					<div id="section-panel-0" role="tabpanel" aria-labelledby="section-tab-0">
+						<ul class="grid gap-1 sm:grid-cols-2">
+							{data.features.map((feature, i) => (
+								<li
+									class="stream group flex items-baseline gap-2 px-2 py-1 text-muted-foreground transition-colors hover:bg-accent-soft hover:text-foreground"
+									style={`animation-delay:${280 + i * 70}ms`}
+								>
+									<span class="text-accent transition-transform group-hover:translate-x-0.5">›</span>
+									{feature}
+								</li>
+							))}
+						</ul>
+					</div>
+					<div id="section-panel-1" role="tabpanel" aria-labelledby="section-tab-1" hidden>
+						<p class="max-w-3xl text-muted-foreground">{data.benchmarks.highlight}</p>
+						<a
+							href={data.benchmarks.url}
+							target="_blank" rel="noopener"
+							class="group mt-2 inline-block text-accent transition-colors hover:underline"
+						>
+							{t.common.fullBenchmarks}
+							<span class="text-muted-foreground/50 transition-colors group-hover:text-accent">
+								{" "}
+								↗
+							</span>
+						</a>
+						{charts && (
+							<div class="mt-6">
+								<div
+									role="tablist"
+									aria-label={t.common.benchmarkMetric}
+									class="flex flex-wrap gap-1"
+								>
+									<button
+										type="button"
+										role="tab"
+										id="chart-tab-0"
+										aria-selected="true"
+										aria-controls="chart-panel-0"
+										tabindex={0}
+										data-chart-tab="0"
+										class="chart-tab border border-b-0 border-border-strong px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground transition-colors aria-selected:bg-card/50 aria-selected:text-foreground"
+									>
+										{t.common.memoryUsage}
+									</button>
+									<button
+										type="button"
+										role="tab"
+										id="chart-tab-1"
+										aria-selected="false"
+										aria-controls="chart-panel-1"
+										tabindex={-1}
+										data-chart-tab="1"
+										class="chart-tab border border-b-0 border-border-strong px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground transition-colors aria-selected:bg-card/50 aria-selected:text-foreground"
+									>
+										{t.common.wallClockTime}
+									</button>
+								</div>
+								<div class="border border-border-strong px-3 py-3">
+									<div id="chart-panel-0" role="tabpanel" aria-labelledby="chart-tab-0">
+										<BenchmarkChart
+											compact
+											title={t.common.memoryUsage}
+											tableLabel={t.common.viewAsTable}
+											scenarioLabel={t.common.scenario}
+											baseDelay={280}
+											{...charts.memory}
+										/>
+									</div>
+									<div id="chart-panel-1" role="tabpanel" aria-labelledby="chart-tab-1" hidden>
+										<BenchmarkChart
+											compact
+											title={t.common.wallClockTime}
+											caption={t.common.logScaleCaption}
+											tableLabel={t.common.viewAsTable}
+											scenarioLabel={t.common.scenario}
+											baseDelay={280}
+											{...charts.time}
+										/>
+									</div>
+								</div>
+							</div>
+						)}
+					</div>
+				</div>
+			</>
+		) : (
+			<ul class="mt-2 grid gap-1 sm:grid-cols-2">
+				{data.features.map((feature, i) => (
 					<li
 						class="stream group flex items-baseline gap-2 px-2 py-1 text-muted-foreground transition-colors hover:bg-accent-soft hover:text-foreground"
 						style={`animation-delay:${280 + i * 70}ms`}
@@ -162,87 +277,10 @@ const softwareApplicationLd = {
 						<span class="text-accent transition-transform group-hover:translate-x-0.5">›</span>
 						{feature}
 					</li>
-				))
-			}
-		</ul>
+				))}
+			</ul>
+		)}
 	</div>
-
-	<!-- benchmarks -->
-	{
-		data.benchmarks && (
-			<div class="rise mt-10" style="animation-delay:240ms">
-				<p>
-					<span class="text-accent">{prompt}</span>
-					<span class="ml-2 text-foreground">cat ./benchmarks</span>
-				</p>
-				<p class="mt-2 max-w-3xl text-muted-foreground">{data.benchmarks.highlight}</p>
-				<a
-					href={data.benchmarks.url}
-					target="_blank" rel="noopener"
-					class="group mt-2 inline-block text-accent transition-colors hover:underline"
-				>
-					{t.common.fullBenchmarks}
-					<span class="text-muted-foreground/50 transition-colors group-hover:text-accent">
-						{" "}
-						↗
-					</span>
-				</a>
-				{charts && (
-					<div class="mt-6">
-						<div role="tablist" aria-label={t.common.benchmarkMetric} class="flex flex-wrap gap-1">
-							<button
-								type="button"
-								role="tab"
-								id="chart-tab-0"
-								aria-selected="true"
-								aria-controls="chart-panel-0"
-								tabindex={0}
-								data-chart-tab="0"
-								class="chart-tab border border-b-0 border-border-strong px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground transition-colors aria-selected:bg-card/50 aria-selected:text-foreground"
-							>
-								{t.common.memoryUsage}
-							</button>
-							<button
-								type="button"
-								role="tab"
-								id="chart-tab-1"
-								aria-selected="false"
-								aria-controls="chart-panel-1"
-								tabindex={-1}
-								data-chart-tab="1"
-								class="chart-tab border border-b-0 border-border-strong px-3 py-1.5 text-xs uppercase tracking-wider text-muted-foreground transition-colors aria-selected:bg-card/50 aria-selected:text-foreground"
-							>
-								{t.common.wallClockTime}
-							</button>
-						</div>
-						<div class="border border-border-strong px-3 py-3">
-							<div id="chart-panel-0" role="tabpanel" aria-labelledby="chart-tab-0">
-								<BenchmarkChart
-									compact
-									title={t.common.memoryUsage}
-									tableLabel={t.common.viewAsTable}
-									scenarioLabel={t.common.scenario}
-									baseDelay={280}
-									{...charts.memory}
-								/>
-							</div>
-							<div id="chart-panel-1" role="tabpanel" aria-labelledby="chart-tab-1" hidden>
-								<BenchmarkChart
-									compact
-									title={t.common.wallClockTime}
-									caption={t.common.logScaleCaption}
-									tableLabel={t.common.viewAsTable}
-									scenarioLabel={t.common.scenario}
-									baseDelay={280}
-									{...charts.time}
-								/>
-							</div>
-						</div>
-					</div>
-				)}
-			</div>
-		)
-	}
 
 	<!-- components -->
 	{
@@ -348,28 +386,33 @@ const softwareApplicationLd = {
 
 <script>
 	document.addEventListener("astro:page-load", () => {
-		const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-chart-tab]"));
-		if (tabs.length === 0) return;
+		function wireTabs(selector: string) {
+			const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>(selector));
+			if (tabs.length === 0) return;
 
-		function select(index: number) {
+			function select(index: number) {
+				tabs.forEach((tab, i) => {
+					const active = i === index;
+					tab.setAttribute("aria-selected", String(active));
+					tab.tabIndex = active ? 0 : -1;
+					const panel = document.getElementById(tab.getAttribute("aria-controls") ?? "");
+					if (panel) panel.hidden = !active;
+				});
+			}
+
 			tabs.forEach((tab, i) => {
-				const active = i === index;
-				tab.setAttribute("aria-selected", String(active));
-				tab.tabIndex = active ? 0 : -1;
-				const panel = document.getElementById(tab.getAttribute("aria-controls") ?? "");
-				if (panel) panel.hidden = !active;
+				tab.addEventListener("click", () => select(i));
+				tab.addEventListener("keydown", (e) => {
+					if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+					e.preventDefault();
+					const next = e.key === "ArrowRight" ? (i + 1) % tabs.length : (i - 1 + tabs.length) % tabs.length;
+					select(next);
+					tabs[next].focus();
+				});
 			});
 		}
 
-		tabs.forEach((tab, i) => {
-			tab.addEventListener("click", () => select(i));
-			tab.addEventListener("keydown", (e) => {
-				if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-				e.preventDefault();
-				const next = e.key === "ArrowRight" ? (i + 1) % tabs.length : (i - 1 + tabs.length) % tabs.length;
-				select(next);
-				tabs[next].focus();
-			});
-		});
+		wireTabs("[data-section-tab]");
+		wireTabs("[data-chart-tab]");
 	});
 </script>
