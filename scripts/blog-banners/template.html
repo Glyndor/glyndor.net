@@ -23,10 +23,9 @@ body{display:flex;font-family:"JBMono",monospace;background:#000;}
 .textzone{position:relative;z-index:3;flex:1;height:100%;display:flex;flex-direction:column;
   justify-content:center;padding:0 80px 0 30px;gap:18px;}
 .prompt{font-weight:700;font-size:27px;letter-spacing:1px;color:#ddc2ff;text-shadow:0 0 12px rgba(176,107,255,.8);}
-.brand{font-weight:700;font-size:96px;line-height:.92;letter-spacing:2px;color:#fff;
-  text-shadow:0 0 18px rgba(176,107,255,.55),0 0 4px rgba(221,194,255,.7);display:flex;align-items:baseline;gap:20px;}
-.version{font-size:40px;color:#ddc2ff;letter-spacing:1px;}
-.tag{font-weight:400;font-size:27px;line-height:1.3;opacity:.92;max-width:790px;color:#ddc2ff;
+.version{font-weight:700;font-size:104px;line-height:.92;letter-spacing:1px;color:#fff;
+  text-shadow:0 0 18px rgba(176,107,255,.55),0 0 4px rgba(221,194,255,.7);}
+.tag{font-weight:400;font-size:29px;line-height:1.3;opacity:.92;max-width:790px;color:#ddc2ff;
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;}
 .foot{margin-top:4px;display:flex;align-items:center;gap:16px;font-weight:400;font-size:21px;opacity:.62;color:#b06bff;}
 .foot .dot{width:8px;height:8px;border-radius:50%;background:#b06bff;box-shadow:0 0 8px #b06bff;}
@@ -44,8 +43,8 @@ body{display:flex;font-family:"JBMono",monospace;background:#000;}
     </div>
     <div class="divider"></div>
     <div class="textzone">
-      <div class="prompt">~/ $ podup up<span></span></div>
-      <div class="brand">PODUP<span class="version" id="version"></span></div>
+      <div class="prompt">~/blog $ cat release.md</div>
+      <div class="version" id="version"></div>
       <div class="tag" id="highlight"></div>
       <div class="foot"><span class="dot"></span><span id="date"></span><span class="dot"></span>glyndor.net</div>
     </div>
