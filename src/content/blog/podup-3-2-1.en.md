@@ -5,7 +5,7 @@ title: "podup 3.2.1"
 description: "Maintenance release: CI lane hardening, benchmark docs, streaming test coverage, and a dependency bump."
 date: 2026-07-28
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-2-1.en.png
 contributors: ["Jaro-c", "dependabot[bot]"]
 ---
 

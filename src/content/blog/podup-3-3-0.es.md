@@ -5,7 +5,7 @@ title: "podup 3.3.0"
 description: "up ya no descarga una imagen que el host ya tiene, y attach/run/events detectan un stream muerto por fuera de banda igual que logs y stats."
 date: 2026-07-29
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-3-0.es.png
 contributors: ["Jaro-c"]
 ---
 

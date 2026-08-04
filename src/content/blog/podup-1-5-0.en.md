@@ -5,7 +5,7 @@ title: "podup 1.5.0"
 description: "Release signatures are now verified with verify_strict, rm failures propagate instead of exit 0, and self-update self-tests the new binary with rollback."
 date: 2026-06-26
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-5-0.en.png
 contributors: ["Jaro-c"]
 ---
 

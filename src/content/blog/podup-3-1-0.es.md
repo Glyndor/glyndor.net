@@ -5,7 +5,7 @@ title: "podup 3.1.0"
 description: "En hosts SELinux, run ahora relabela los bind mounts y los secrets file: se vuelven secrets nativos; config también resuelve env_file en environment."
 date: 2026-07-26
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-1-0.es.png
 contributors: ["Jaro-c"]
 ---
 

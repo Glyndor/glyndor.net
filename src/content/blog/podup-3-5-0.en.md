@@ -5,7 +5,7 @@ title: "podup 3.5.0"
 description: "ps, images, and events output gained new columns, shifting table layout; --format json stays a compatible superset."
 date: 2026-08-03
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-5-0.en.png
 contributors: ["Jaro-c"]
 ---
 

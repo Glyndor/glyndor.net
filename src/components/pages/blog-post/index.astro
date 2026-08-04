@@ -1,7 +1,6 @@
 ---
 import type { Locale } from "@/lib/i18n";
 import { getDictionary, localizePath } from "@/lib/i18n";
-import { extractVersion } from "@/lib/blog";
 import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import { getImage, Image } from "astro:assets";
@@ -24,7 +23,6 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
 	timeZone: "UTC",
 });
 
-const version = extractVersion(entry.data.title);
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const bannerImage = entry.data.banner
 	? await getImage({ src: entry.data.banner, width: 1200, format: "webp" })
@@ -80,16 +78,8 @@ const blogPostingLd = {
 
 	{
 		entry.data.banner && (
-			<div
-				class="rise relative mt-4 overflow-hidden border border-border-strong"
-				style="animation-delay:100ms"
-			>
+			<div class="rise mt-4 overflow-hidden border border-border-strong" style="animation-delay:100ms">
 				<Image src={entry.data.banner} alt="" width={1200} height={630} class="h-auto w-full" />
-				{version && (
-					<span class="absolute bottom-3 right-3 border border-border-strong bg-card/80 px-3 py-1.5 font-mono text-sm text-accent backdrop-blur">
-						v{version}
-					</span>
-				)}
 			</div>
 		)
 	}

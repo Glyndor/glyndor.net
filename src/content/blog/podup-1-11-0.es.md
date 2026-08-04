@@ -5,7 +5,7 @@ title: "podup 1.11.0"
 description: "Los comandos de ciclo de vida ahora fallan con código de salida correcto, se cierra una vía de escalada de privilegios en quadlet uninstall, y el teardown se paraleliza."
 date: 2026-07-18
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-11-0.es.png
 contributors: ["Jaro-c"]
 ---
 

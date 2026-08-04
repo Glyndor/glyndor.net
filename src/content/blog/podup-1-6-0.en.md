@@ -5,7 +5,7 @@ title: "podup 1.6.0"
 description: "Colourised human output, a replica-count cap against untrusted-compose DoS, and --env-file last-file-wins."
 date: 2026-06-28
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-6-0.en.png
 contributors: ["Jaro-c"]
 ---
 

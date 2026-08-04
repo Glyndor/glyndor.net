@@ -5,7 +5,7 @@ title: "podup 1.5.0"
 description: "Las firmas de release ahora se verifican con verify_strict, los fallos de rm propagan en vez de dar exit 0, y self-update se auto-testea con rollback."
 date: 2026-06-26
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-5-0.es.png
 contributors: ["Jaro-c"]
 ---
 

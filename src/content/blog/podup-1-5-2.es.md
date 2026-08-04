@@ -5,7 +5,7 @@ title: "podup 1.5.2"
 description: "podup ahora se valida contra Podman 6.0.0 en CI, y un nuevo job diario vigila si aparece una versión de Podman más reciente."
 date: 2026-06-27
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-5-2.es.png
 contributors: ["Jaro-c"]
 ---
 

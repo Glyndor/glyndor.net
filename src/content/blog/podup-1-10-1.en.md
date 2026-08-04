@@ -5,7 +5,7 @@ title: "podup 1.10.1"
 description: "podup relicensed from Apache-2.0 to MIT — no code changes in this release."
 date: 2026-07-17
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-10-1.en.png
 contributors: ["Jaro-c"]
 ---
 

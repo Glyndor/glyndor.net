@@ -5,7 +5,7 @@ title: "podup 3.2.0"
 description: "logs now exits non-zero when its stream truncates live output, instead of silently dropping it."
 date: 2026-07-27
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-2-0.en.png
 contributors: ["Jaro-c"]
 ---
 

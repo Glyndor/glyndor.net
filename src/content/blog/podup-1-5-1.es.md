@@ -5,7 +5,7 @@ title: "podup 1.5.1"
 description: "cp ahora soporta renombrar al copiar a un contenedor, y acepta nombres de servicio de un solo carácter."
 date: 2026-06-26
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-5-1.es.png
 contributors: ["Jaro-c"]
 ---
 

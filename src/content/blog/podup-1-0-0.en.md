@@ -5,7 +5,7 @@ title: "podup 1.0.0"
 description: "The first stable release: the public library API is frozen for 1.0, with TOCTOU/XDG, ulimit, and Quadlet secret-sanitization fixes, and signed releases."
 date: 2026-06-16
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-0-0.en.png
 contributors: ["Jaro-c"]
 ---
 

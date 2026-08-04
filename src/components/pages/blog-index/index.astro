@@ -1,7 +1,7 @@
 ---
 import type { Locale } from "@/lib/i18n";
 import { getDictionary, localizePath } from "@/lib/i18n";
-import { extractVersion, type getPostsByLocale } from "@/lib/blog";
+import type { getPostsByLocale } from "@/lib/blog";
 import { Image } from "astro:assets";
 import type { Page } from "astro";
 
@@ -93,20 +93,13 @@ const filterHref = (project: string | null) =>
 							class="group grid grid-cols-[auto_1fr] items-center gap-4 px-2 py-4 transition-colors hover:bg-accent-soft sm:grid-cols-[5rem_7rem_1fr_auto]"
 						>
 							{post.data.banner ? (
-								<span class="relative hidden size-14 sm:block">
-									<Image
-										src={post.data.banner}
-										alt=""
-										width={80}
-										height={80}
-										class="size-14 border border-border-strong object-cover"
-									/>
-									{extractVersion(post.data.title) && (
-										<span class="absolute bottom-0 right-0 bg-card/85 px-0.5 font-mono text-[8px] leading-tight text-accent">
-											v{extractVersion(post.data.title)}
-										</span>
-									)}
-								</span>
+								<Image
+									src={post.data.banner}
+									alt=""
+									width={80}
+									height={80}
+									class="hidden size-14 border border-border-strong object-cover sm:block"
+								/>
 							) : (
 								<span class="hidden size-14 border border-border-strong bg-card/50 sm:block" />
 							)}

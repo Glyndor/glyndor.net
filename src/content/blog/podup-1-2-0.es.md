@@ -5,7 +5,7 @@ title: "podup 1.2.0"
 description: "Fixes de depends_on en Compose para servicios escalados y extends, mapeo de security_opt en quadlet, e instaladores de release firmados con SBOM/NOTICES."
 date: 2026-06-23
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-2-0.es.png
 contributors: ["Jaro-c", "dependabot[bot]"]
 ---
 
