@@ -5,7 +5,7 @@ title: "podup 1.13.0"
 description: "Quadlet ahora descubre y fusiona los archivos de override de compose, más fixes para el flag no-TTY, .containerignore, pulls fallidos silenciosos y logs colgado al cerrar el pipe."
 date: 2026-07-20
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-13-0.es.png
 contributors: ["Jaro-c"]
 ---
 

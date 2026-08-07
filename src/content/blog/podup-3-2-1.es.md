@@ -5,7 +5,7 @@ title: "podup 3.2.1"
 description: "Release de mantenimiento: endurecimiento de CI, documentación de benchmarks, cobertura de tests de streaming y un bump de dependencia."
 date: 2026-07-28
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-2-1.es.png
 contributors: ["Jaro-c", "dependabot[bot]"]
 ---
 

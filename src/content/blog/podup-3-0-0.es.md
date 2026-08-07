@@ -5,7 +5,7 @@ title: "podup 3.0.0"
 description: "Cambio incompatible: los enums de opciones de compose ahora son no-exhaustivos. También nuevo: exec y run interactivos en Windows."
 date: 2026-07-23
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-0-0.es.png
 contributors: ["Jaro-c"]
 ---
 

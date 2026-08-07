@@ -5,7 +5,7 @@ title: "podup 2.0.0"
 description: "podup 2.0.0 is a major release: exec/run get a real terminal, autostart stop is now bounded, and an interrupted up exits 130."
 date: 2026-07-21
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-2-0-0.en.png
 contributors: ["Jaro-c"]
 ---
 

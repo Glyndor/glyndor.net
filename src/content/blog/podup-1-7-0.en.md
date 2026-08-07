@@ -5,7 +5,7 @@ title: "podup 1.7.0"
 description: "A 220-finding correctness sweep across the whole CLI, plus parallel lifecycle ops, progress output, and better table rendering."
 date: 2026-06-29
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-7-0.en.png
 contributors: ["Jaro-c", "dependabot[bot]"]
 ---
 

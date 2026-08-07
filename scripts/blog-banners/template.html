@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"JBMono";src:url("fonts/jbmono.ttf") format("truetype");font-weight:700;}
+@font-face{font-family:"JBMono";src:url("fonts/jbmono-r.ttf") format("truetype");font-weight:400;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:1280px;height:640px;}
+body{display:flex;font-family:"JBMono",monospace;background:#000;}
+.card{width:1280px;height:640px;position:relative;overflow:hidden;display:flex;align-items:center;
+  background:radial-gradient(90% 130% at 22% 40%,#1f1038 0%,#110a1f 55%,#070510 100%);
+  color:#b06bff;text-shadow:0 0 7px rgba(176,107,255,.4);}
+.glow{position:absolute;inset:0;z-index:1;box-shadow:inset 0 0 200px rgba(176,107,255,.07),inset 0 0 50px rgba(176,107,255,.12);}
+.card::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0 3px,rgba(0,0,0,.09) 3px 4px);}
+.vig{position:absolute;inset:0;z-index:5;pointer-events:none;
+  background:radial-gradient(120% 120% at 36% 46%,rgba(0,0,0,0) 50%,rgba(0,0,0,.5) 100%);}
+.glyphzone{position:relative;z-index:3;width:460px;height:100%;flex:0 0 460px;
+  display:flex;align-items:center;justify-content:center;}
+.deck{position:relative;width:250px;height:250px;}
+.plate{position:absolute;width:184px;height:184px;border-radius:20px;border:3px solid #b06bff;
+  background:linear-gradient(135deg,#ddc2ff,#b06bff 45%,#5a2d99 100%);
+  box-shadow:0 0 26px rgba(176,107,255,.30),inset 0 3px 0 rgba(255,255,255,.25),inset 0 -5px 0 rgba(0,0,0,.3);}
+.p1{top:0;left:0;opacity:.4;} .p2{top:33px;left:33px;opacity:.68;} .p3{top:66px;left:66px;opacity:1;}
+.textzone{position:relative;z-index:3;flex:1;height:100%;display:flex;flex-direction:column;
+  justify-content:center;padding:0 80px 0 30px;gap:18px;}
+.prompt{font-weight:700;font-size:27px;letter-spacing:1px;color:#ddc2ff;text-shadow:0 0 12px rgba(176,107,255,.8);}
+.version{font-weight:700;font-size:104px;line-height:.92;letter-spacing:1px;color:#fff;
+  text-shadow:0 0 18px rgba(176,107,255,.55),0 0 4px rgba(221,194,255,.7);}
+.tag{font-weight:400;font-size:29px;line-height:1.3;opacity:.92;max-width:790px;color:#ddc2ff;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;}
+.foot{margin-top:4px;display:flex;align-items:center;gap:16px;font-weight:400;font-size:21px;opacity:.62;color:#b06bff;}
+.foot .dot{width:8px;height:8px;border-radius:50%;background:#b06bff;box-shadow:0 0 8px #b06bff;}
+.divider{position:absolute;z-index:3;left:460px;top:18%;bottom:18%;width:2px;
+  background:linear-gradient(180deg,transparent,#b06bff,transparent);opacity:.5;}
+.corner{position:absolute;z-index:4;width:40px;height:40px;border-color:#b06bff;opacity:.6;}
+.tl{top:34px;left:36px;border-top:3px solid;border-left:3px solid;}
+.tr{top:34px;right:36px;border-top:3px solid;border-right:3px solid;}
+.bl{bottom:34px;left:36px;border-bottom:3px solid;border-left:3px solid;}
+.br{bottom:34px;right:36px;border-bottom:3px solid;border-right:3px solid;}
+</style></head><body>
+  <div class="card"><div class="glow"></div>
+    <div class="glyphzone">
+      <div class="deck"><div class="plate p1"></div><div class="plate p2"></div><div class="plate p3"></div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="textzone">
+      <div class="prompt">~/blog $ cat release.md</div>
+      <div class="version" id="version"></div>
+      <div class="tag" id="highlight"></div>
+      <div class="foot"><span class="dot"></span><span id="date"></span><span class="dot"></span>glyndor.net</div>
+    </div>
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div class="vig"></div>
+  </div>
+<script>
+  const p = new URLSearchParams(location.search);
+  document.getElementById("version").textContent = `v${p.get("version") || ""}`;
+  document.getElementById("highlight").textContent = p.get("highlight") || "";
+  document.getElementById("date").textContent = p.get("date") || "";
+</script>
+</body></html>

@@ -5,7 +5,7 @@ title: "podup 3.4.1"
 description: "top no longer aborts on a stopped container, and secrets teardown got faster."
 date: 2026-08-01
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-4-1.en.png
 contributors: ["Jaro-c"]
 ---
 

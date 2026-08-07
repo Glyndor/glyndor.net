@@ -5,7 +5,7 @@ title: "podup 3.0.2"
 description: "stats now exits non-zero on a truncated live sample, and cp/watch sync into a container work correctly on Podman 6."
 date: 2026-07-25
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-0-2.en.png
 contributors: ["Jaro-c"]
 ---
 

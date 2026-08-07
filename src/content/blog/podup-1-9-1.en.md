@@ -5,7 +5,7 @@ title: "podup 1.9.1"
 description: "The .deb package now ships the version that was actually released, and CI verifies it before publishing."
 date: 2026-07-15
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-9-1.en.png
 contributors: ["Jaro-c"]
 ---
 

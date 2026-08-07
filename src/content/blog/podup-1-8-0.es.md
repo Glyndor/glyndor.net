@@ -5,7 +5,7 @@ title: "podup 1.8.0"
 description: "Los nombres de réplicas escaladas ahora siempre llevan sufijo de índice, igual que docker/podman-compose."
 date: 2026-06-29
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-8-0.es.png
 contributors: ["Jaro-c"]
 ---
 

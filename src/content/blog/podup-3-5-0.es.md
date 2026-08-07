@@ -5,7 +5,7 @@ title: "podup 3.5.0"
 description: "La salida de ps, images y events ganó columnas nuevas y cambió de forma; --format json sigue siendo un superset compatible."
 date: 2026-08-03
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-5-0.es.png
 contributors: ["Jaro-c"]
 ---
 

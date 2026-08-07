@@ -5,7 +5,7 @@ title: "podup 1.0.0"
 description: "Primera versión estable: API pública de la librería congelada para 1.0, fixes de TOCTOU/XDG, ulimit y sanitización de secrets en Quadlet, y releases firmados."
 date: 2026-06-16
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-0-0.es.png
 contributors: ["Jaro-c"]
 ---
 

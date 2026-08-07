@@ -5,7 +5,7 @@ title: "podup 1.4.0"
 description: "STATUS de ps ahora refleja el estado real del contenedor, stats dejó de unir containers con comas, y lifecycle tiene exit codes idempotentes."
 date: 2026-06-25
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-4-0.es.png
 contributors: ["Jaro-c"]
 ---
 

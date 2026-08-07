@@ -5,7 +5,7 @@ title: "podup 2.1.0"
 description: "run gets a real terminal on Unix, sub-second healthcheck intervals are honored, and socket errors now say which socket and how to enable it."
 date: 2026-07-21
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-2-1-0.en.png
 contributors: ["Jaro-c"]
 ---
 

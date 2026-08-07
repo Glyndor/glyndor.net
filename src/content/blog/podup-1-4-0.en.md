@@ -5,7 +5,7 @@ title: "podup 1.4.0"
 description: "ps STATUS now reflects real container state, stats stopped comma-joining containers, and lifecycle commands get idempotent exit codes."
 date: 2026-06-25
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-4-0.en.png
 contributors: ["Jaro-c"]
 ---
 

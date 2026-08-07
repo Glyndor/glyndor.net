@@ -5,7 +5,7 @@ title: "podup 3.4.0"
 description: "podup build now writes to stderr instead of stdout, and up/down/pull/build gained a live-updating terminal board."
 date: 2026-07-30
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-4-0.en.png
 contributors: ["Jaro-c"]
 ---
 

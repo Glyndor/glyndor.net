@@ -5,7 +5,7 @@ title: "podup 3.4.0"
 description: "podup build ahora escribe a stderr en vez de stdout, y up/down/pull/build ahora muestran un tablero en vivo en la terminal."
 date: 2026-07-30
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-3-4-0.es.png
 contributors: ["Jaro-c"]
 ---
 

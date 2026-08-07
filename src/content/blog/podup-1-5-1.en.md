@@ -5,7 +5,7 @@ title: "podup 1.5.1"
 description: "cp now supports rename-on-copy into a container, and accepts single-character service names."
 date: 2026-06-26
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-5-1.en.png
 contributors: ["Jaro-c"]
 ---
 

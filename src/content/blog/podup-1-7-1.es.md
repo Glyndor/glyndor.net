@@ -5,7 +5,7 @@ title: "podup 1.7.1"
 description: "port valida sus argumentos de protocolo y puerto privado, exec resuelve réplicas escaladas, y el modo tmpfs de quadlet se renderiza bien."
 date: 2026-06-29
 project: podup
-banner: ../../assets/og/podup.png
+banner: ../../assets/og/blog/podup-1-7-1.es.png
 contributors: ["Jaro-c"]
 ---
 
