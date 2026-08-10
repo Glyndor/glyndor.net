@@ -1,12 +1,12 @@
 {
-	"Glyndor/podup": "v3.4.1",
-	"Glyndor/helmly": "dashboard@1.5.0",
-	"Glyndor/helmly-agent": "v1.4.1",
-	"Glyndor/epistle": "v0.3.4",
-	"Glyndor/epistle-panel": "",
-	"Glyndor/authcore": "v1.11.7",
-	"Glyndor/unitpm": "",
-	"Glyndor/klyradb": "v0.7.2",
-	"Glyndor/specio": "v0.3.2",
-	"Glyndor/viden": ""
+  "Glyndor/podup": "v3.6.1",
+  "Glyndor/helmly": "dashboard@1.5.0",
+  "Glyndor/helmly-agent": "v1.4.1",
+  "Glyndor/epistle": "v0.3.4",
+  "Glyndor/epistle-panel": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/releases/releases#get-the-latest-release\",\"status\":\"404\"}",
+  "Glyndor/authcore": "v1.11.7",
+  "Glyndor/unitpm": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/releases/releases#get-the-latest-release\",\"status\":\"404\"}",
+  "Glyndor/klyradb": "v0.7.2",
+  "Glyndor/specio": "v0.3.2",
+  "Glyndor/viden": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/releases/releases#get-the-latest-release\",\"status\":\"404\"}"
 }
