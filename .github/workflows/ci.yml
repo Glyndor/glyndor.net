@@ -13,4 +13,10 @@ jobs:
   # node-ci reusable that does not exist in Glyndor/.github — which is half of
   # why no run ever started here.
   bun:
-    uses: Glyndor/.github/.github/workflows/bun-ci.yml@e61aaf0e920345b3dbb82cacd3bd36a499951a92 # v1.13.0
+    uses: Glyndor/.github/.github/workflows/bun-ci.yml@d4bbc5b6ec0c351ca4cb17d948ceaad818da4078 # v1.18.1
+  pin-policy:
+    uses: Glyndor/.github/.github/workflows/pin-policy-reusable.yml@d4bbc5b6ec0c351ca4cb17d948ceaad818da4078 # v1.18.1
+  dependabot-freshness:
+    uses: Glyndor/.github/.github/workflows/dependabot-freshness.yml@d4bbc5b6ec0c351ca4cb17d948ceaad818da4078 # v1.18.1
+    with:
+      max-age-days: 15
