@@ -60,12 +60,4 @@ export const installMethods: Record<string, InstallMethod[]> = {
 			command: "go get github.com/Glyndor/authcore",
 		},
 	],
-	klyradb: [
-		{
-			label: "snap",
-			os: "linux",
-			platform: "Linux (snapd)",
-			command: "sudo snap install klyradb",
-		},
-	],
 };

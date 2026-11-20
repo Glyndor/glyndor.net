@@ -177,35 +177,6 @@ export const en = {
 			url: "https://pkg.go.dev/github.com/Glyndor/authcore",
 			repo: "https://github.com/Glyndor/authcore",
 		},
-		unitpm: {
-			name: "unitpm",
-			tagline: "A drop-in PM2 alternative, systemd-native.",
-			summary:
-				"unitpm manages long-running processes on Linux without a background daemon of its own — it drives systemd directly, so supervised processes survive a unitpm crash or reboot. CLI and library, written in Go, zero-overhead by design.",
-			features: [
-				"systemd-native, no daemon of its own",
-				"Drop-in alternative to PM2 / Supervisor",
-				"CLI and library, written in Go",
-				"Zero-overhead process supervision",
-			],
-			status: "inDevelopment" as StatusKey,
-			repo: "https://github.com/Glyndor/unitpm",
-		},
-		klyradb: {
-			name: "klyradb",
-			tagline: "A desktop DB manager for Linux, like DBngin.",
-			summary:
-				"klyradb is a native desktop app for spinning up isolated PostgreSQL, MySQL, MariaDB, Redis and MongoDB instances on Linux — start, stop and inspect local databases without hand-rolling Compose files or systemd units. Engines download and run on demand.",
-			features: [
-				"PostgreSQL, MySQL, MariaDB, Redis, MongoDB",
-				"Isolated, disposable local instances",
-				"Native desktop app, no Docker required",
-				"Engines download on demand",
-			],
-			status: "released" as StatusKey,
-			url: "https://snapcraft.io/klyradb",
-			repo: "https://github.com/Glyndor/klyradb",
-		},
 		specio: {
 			name: "specio",
 			tagline: "See what a website is built with.",
